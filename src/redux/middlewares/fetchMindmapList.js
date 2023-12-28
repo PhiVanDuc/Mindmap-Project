@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMindmapList = createAsyncThunk("fetchMindmapList", async () => {
-    const response = await fetch("https://z65x4n-8080.csb.app/mindmap");
+    const response = await fetch("https://mindmap.ndng.net/mindmap");
     if (response.ok) {
         const data = await response.json();
         return data;
@@ -10,7 +10,7 @@ export const fetchMindmapList = createAsyncThunk("fetchMindmapList", async () =>
 })
 
 export const fetchUpdateMindmapList = createAsyncThunk("fetchUpdateMindmapList", async (payload) => {
-    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap/${payload.id}`, {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -20,7 +20,7 @@ export const fetchUpdateMindmapList = createAsyncThunk("fetchUpdateMindmapList",
 })
 
 export const fetchAddMindmapList = createAsyncThunk("fetchAddMindmapList", async (payload) => {
-    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap`, {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -30,7 +30,7 @@ export const fetchAddMindmapList = createAsyncThunk("fetchAddMindmapList", async
 })
 
 export const fetchDeleteMindmapList = createAsyncThunk("fetchDeleteMindmapList", async (payload) => {
-    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap/${payload}`, {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload}`, {
         method: "DELETE"
     });
 })

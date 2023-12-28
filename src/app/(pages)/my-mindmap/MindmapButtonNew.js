@@ -55,7 +55,7 @@ export default function MindmapButtonNew({ id }) {
                 userEmail: session?.user?.email,
                 created_at: currentDate.toISOString()
             }
-
+            
             dispatch(fetchAddMindmapList(newMindmap))
         }
 

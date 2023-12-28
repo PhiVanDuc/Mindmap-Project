@@ -3,7 +3,7 @@
 import { fetchDeleteMindmapList, fetchMindmapList } from "@/redux/middlewares/fetchMindmapList";
 
 import { useSession } from "next-auth/react"
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 
@@ -12,12 +12,17 @@ import Link from "next/link";
 export default function MindmapTable() {
     const { data: session } = useSession()
     const mindmapList = useSelector((state) => state.mindmap.mindmapList)
+    const mindmapListRef = useRef([])
     const status = useSelector((state) => state.mindmap.status)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchMindmapList())
     }, [])
+
+    useEffect(() => {
+        mindmapListRef.current = mindmapList;
+    }, [mindmapList])
 
     const handleClickDeleteMindmap = (id) => {
         const thisButton = document.querySelector(`[data-id="${id}"]`);
@@ -56,7 +61,7 @@ export default function MindmapTable() {
     return (
         <Fragment>
             {
-                mindmapList.length > 0 && mindmapList.map(({ id, name, description, userEmail, created_at }) => {
+                mindmapListRef.current.length > 0 && mindmapListRef.current.map(({ id, name, description, userEmail, created_at }) => {
                     if (session?.user?.email === userEmail) {
                         return (
                             <div className="table-row" key={ id }>
