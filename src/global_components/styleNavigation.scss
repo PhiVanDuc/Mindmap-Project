@@ -1,0 +1,94 @@
+@import '../assets/scss/variables.scss';
+
+.header-main {
+    padding: 15px 0px;
+    box-shadow: 0px 12px 87px -7px rgba(0,0,0,0.05);
+    -webkit-box-shadow: 0px 12px 87px -7px rgba(0,0,0,0.05);
+    -moz-box-shadow: 0px 12px 87px -7px rgba(0,0,0,0.05);
+
+    .container {
+        width: 1200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0px 10px;
+
+        .nav-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            
+            a {
+                color: $base_color;
+            }
+        }
+
+        .right-side {
+            display: flex;
+            align-items: center;
+
+            .nav-list {
+                display: flex;
+                align-items: center;
+
+                .nav-item {
+                    margin-right: 15px;
+                }
+
+                .nav-link {
+                    font-size: 1.4rem;
+                    margin-right: 10px;
+                    padding: 10px 10px;
+                    border-radius: 5px;
+
+                    &:hover {
+                        background-color: rgba(128, 128, 128, 0.1);
+                    }
+
+                    &.active {
+                        background-color: $base_color;
+                        color: white;
+                    }
+                }
+            }
+
+            .other-options {
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin-right: 15px;
+                    color: $base_color;
+                }
+
+                a,
+                button {
+                    font-size: 1.4rem;
+                    border: 1px solid $base_color;
+                    border-radius: 5px;
+                    padding: 8px 15px;
+                    color: $base_color;
+                    background-color: transparent;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $base_color;
+                        color: white;
+                    }
+
+                    &:last-child {
+                        margin-right: 0px;
+                    }
+                }
+
+                a {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+}   

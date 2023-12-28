@@ -1,0 +1,57 @@
+.mindmap-info {
+    padding: 30px 0px;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1200px;
+        max-width: 100%;
+        padding: 0 10px;
+        margin: 0 auto;
+
+        .mindmap-inputs {
+            display: flex;
+            flex-direction: column;
+
+            input {
+                font-size: 3.5rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            textarea {
+                resize: none;
+                font-size: 1.7rem;
+                min-height: 25px;
+                height: 25px;
+            }
+        }
+
+        .mindmap-buttons {
+            button {
+                display: inline-flex;
+                align-items: center;
+                font-size: 1.4rem;
+                font-weight: 700;
+                padding: 10px 30px;
+                margin-right: 15px;
+                border-radius: 6px;
+                color: white;
+                background-color: rgb(23,163,74);
+                cursor: pointer;
+
+                svg {
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 15px;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                    background-color: rgb(30,78,217);
+                }
+            }
+        }
+    }
+}

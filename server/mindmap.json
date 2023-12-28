@@ -1,0 +1,84 @@
+{
+  "mindmap": [
+    {
+      "id": "82632da6-a197-48f2-aa13-0c382364c822",
+      "name": "Test mindmap",
+      "description": "Mindmap chưa có mô tả",
+      "flow": {
+        "nodes": [
+          {
+            "id": "1",
+            "position": {
+              "x": 0,
+              "y": 0
+            },
+            "data": {
+              "nodeData": {
+                "current": [
+                  {
+                    "id": "1",
+                    "value": "Mindmap"
+                  },
+                  {
+                    "id": "2",
+                    "value": "Anh"
+                  }
+                ]
+              }
+            },
+            "type": "nodeCustomFirst",
+            "width": 250,
+            "height": 60
+          },
+          {
+            "id": "2",
+            "position": {
+              "x": -110.99266805347106,
+              "y": 154.39246478424306
+            },
+            "data": {
+              "nodeData": {
+                "current": [
+                  {
+                    "id": "1",
+                    "value": "Mindmap"
+                  },
+                  {
+                    "id": "2",
+                    "value": "Anh"
+                  }
+                ]
+              }
+            },
+            "type": "nodeCustom",
+            "width": 250,
+            "height": 60,
+            "selected": false,
+            "dragging": false
+          }
+        ],
+        "edges": [
+          {
+            "id": "2",
+            "source": "1",
+            "target": "2",
+            "type": "edgeCustom"
+          }
+        ]
+      },
+      "nodeData": [
+        {
+          "id": "1",
+          "value": "Mindmap"
+        },
+        {
+          "id": "2",
+          "value": "Anh"
+        }
+      ],
+      "isAccessible": false,
+      "userEmail": "phivanduc325@gmail.com",
+      "created_at": "2023-12-28T04:46:12.114Z"
+    }
+  ]
+}
