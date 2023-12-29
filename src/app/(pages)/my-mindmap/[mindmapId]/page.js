@@ -41,13 +41,7 @@ function MindmapPage() {
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     useEffect(() => {
-        if (!skipFirst.current) {
-            skipFirst.current = true
-            return
-        }
-
         dispatch(fetchMindmapId(pathname.replace("/my-mindmap/", "")))
-        skipFirst.current = false
     }, [])
 
     useEffect(() => {
