@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMindmapList = createAsyncThunk("fetchMindmapList", async () => {
-    const response = await fetch("https://mindmap.ndng.net/mindmap");
+    const response = await fetch("https://z65x4n-8080.csb.app/mindmap");
     if (response.ok) {
         const data = await response.json();
         return data;
@@ -10,7 +10,7 @@ export const fetchMindmapList = createAsyncThunk("fetchMindmapList", async () =>
 })
 
 export const fetchMindmapId = createAsyncThunk("fetchMindmapId", async (id) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap/${id}`);
+    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap/${id}`);
     if (response.ok) {
         const data = await response.json();
         return data;
@@ -19,7 +19,7 @@ export const fetchMindmapId = createAsyncThunk("fetchMindmapId", async (id) => {
 })
 
 export const fetchAddMindmap = createAsyncThunk("fetchAddMindmapList", async (payload) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap`, {
+    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ export const fetchAddMindmap = createAsyncThunk("fetchAddMindmapList", async (pa
 })
 
 export const fetchUpdateMindmap = createAsyncThunk("fetchUpdateMindmapList", async (payload) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload.id}`, {
+    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap/${payload.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -39,7 +39,9 @@ export const fetchUpdateMindmap = createAsyncThunk("fetchUpdateMindmapList", asy
 })
 
 export const fetchDeleteMindmap = createAsyncThunk("fetchDeleteMindmapList", async (id) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap/${id}`, {
+    const response = await fetch(`https://z65x4n-8080.csb.app/mindmap/${id}`, {
         method: "DELETE"
     });
 })
+
+// https://mindmap.ndng.net
