@@ -13,9 +13,9 @@ const cssHandle = {
     translate: "0px 50%"
 };
 
-export default function NodeCustomFirst({ data, isConnectable }) {
-    const { nodeData } = data;
-    const [content, setContent] = useState(nodeData.current[0].value);
+export default function NodeCustomFirst({ id, data, isConnectable }) {
+    const {setNodes} = data;
+    const [content, setContent] = useState(data.label);
 
     const nodeCustom = useRef(null);
     const overlay = useRef(null);
@@ -26,9 +26,11 @@ export default function NodeCustomFirst({ data, isConnectable }) {
     const handleChange = (event) => {
         setContent(event.target.value);
 
-        const updatedNodeData = [...nodeData.current];
-        updatedNodeData[0] = { ...updatedNodeData[0], value: event.target.value };
-        nodeData.current = updatedNodeData;
+        setNodes((currentNodes) => {
+            const copy = [...currentNodes];
+            copy[copy.findIndex(obj => obj.id === id)].data.label = event.target.value;
+            return copy;
+        });
     };
 
     const handleMainContentClick = (event) => {

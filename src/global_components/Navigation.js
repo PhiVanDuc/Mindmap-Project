@@ -1,14 +1,14 @@
-"use client"
+import '@/global_components/styleNavigation.scss'
 
 import Link from "next/link"
-import '@/global_components/styleNavigation.scss'
-import { redirect, usePathname } from "next/navigation"
-import { signIn, signOut, useSession } from "next-auth/react"
 import { Fragment } from "react"
+import { getServerSession } from "next-auth/next"
+import options from '@/app/api/auth/[...nextauth]/options'
+import NavLink from './NavLink'
+import ButtonSignOut from './ButtonSignOut'
 
-export default function Navigation() {
-    const pathname = usePathname();
-    const { data } = useSession();
+export default async function Navigation() {
+    const session = await getServerSession(options);
 
     return (
         <header className="header-main">
@@ -19,38 +19,18 @@ export default function Navigation() {
                     </div>
 
                     <div className="right-side">
-                        <ul className="nav-list">
-                            <li className="nav-item">
-                                <Link href="/home" className={ pathname === "/home" ? "nav-link active" : "nav-link" }>Trang chủ</Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link href="/about" className={ pathname === "/about" ? "nav-link active" : "nav-link" }>Giới thiệu</Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link href="/features" className={ pathname === "/features" ? "nav-link active" : "nav-link" }>Tính năng</Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link href="/prices" className={ pathname === "/prices" ? "nav-link active" : "nav-link" }>Bảng giá</Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link href="/contact" className={ pathname === "/contact" ? "nav-link active" : "nav-link" }>Liên hệ</Link>
-                            </li>
-                        </ul>
+                        <NavLink />
 
                         <div className="other-options">
                             {
-                                data ? (
+                                session ? (
                                     <Fragment>
-                                        <p>Hi, { data.user.name }</p>
-                                        <Link href="/my-mindmap">Mindmap</Link>
-                                        <button className="button-logout" onClick={() => { signOut({ callbackUrl: `${window.location.origin}/home` }) }}>Đăng xuất</button>
+                                        <p>Hi, { session.user.name }</p>
+                                        <Link href="/my-mindmap">My mindmap</Link>
+                                        <ButtonSignOut />
                                     </Fragment>
                                 ) : (
-                                    <button className="button-login" onClick={() => { signIn() }}>Đăng nhập</button>
+                                    <Link href="/api/auth/login" className="button-login">Đăng nhập</Link>
                                 )
                             }
                         </div>

@@ -14,28 +14,8 @@ const cssHandle = {
 };
 
 export default function NodeCustom({ id, data, isConnectable }) {
-    const skip = useRef(false);
-    const { nodeData } = data;
-
-    useEffect(() => {
-        if (!skip.current) {
-            skip.current = true;
-            return;
-        }
-
-        const updateNodeData = [...nodeData.current];
-        updateNodeData.push({id, value: `Node ${id}`});
-        nodeData.current = updateNodeData;
-        setContent(() => {
-            const index = nodeData.current.findIndex(obj => obj.id == id);
-            return nodeData.current[index].value
-        })
-    }, []);
-
-    const [content, setContent] = useState(() => {
-        const index = nodeData.current.findIndex(obj => obj.id == id);
-        return nodeData.current[index]?.value || ''
-    });
+    const {setNodes} = data;
+    const [content, setContent] = useState(data.label);
 
     const nodeCustom = useRef(null);
     const overlay = useRef(null);
@@ -45,11 +25,12 @@ export default function NodeCustom({ id, data, isConnectable }) {
 
     const handleChange = (event) => {
         setContent(event.target.value);
-        
-        const index = nodeData.current.findIndex(obj => obj.id == id);
-        const updateNodeData = [...nodeData.current];
-        updateNodeData[index] = {id: id, value: event.target.value}
-        nodeData.current = updateNodeData;
+
+        setNodes((currentNodes) => {
+            const copy = [...currentNodes];
+            copy[copy.findIndex(obj => obj.id === id)].data.label = event.target.value;
+            return copy;
+        });
     };
 
     const handleMainContentClick = (event) => {

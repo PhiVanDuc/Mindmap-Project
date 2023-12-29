@@ -9,17 +9,16 @@ export const fetchMindmapList = createAsyncThunk("fetchMindmapList", async () =>
     else return []
 })
 
-export const fetchUpdateMindmapList = createAsyncThunk("fetchUpdateMindmapList", async (payload) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload.id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
+export const fetchMindmapId = createAsyncThunk("fetchMindmapId", async (id) => {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap/${id}`);
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    else return {}
 })
 
-export const fetchAddMindmapList = createAsyncThunk("fetchAddMindmapList", async (payload) => {
+export const fetchAddMindmap = createAsyncThunk("fetchAddMindmapList", async (payload) => {
     const response = await fetch(`https://mindmap.ndng.net/mindmap`, {
         method: "POST",
         headers: {
@@ -29,8 +28,18 @@ export const fetchAddMindmapList = createAsyncThunk("fetchAddMindmapList", async
     });
 })
 
-export const fetchDeleteMindmapList = createAsyncThunk("fetchDeleteMindmapList", async (payload) => {
-    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload}`, {
+export const fetchUpdateMindmap = createAsyncThunk("fetchUpdateMindmapList", async (payload) => {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap/${payload.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+})
+
+export const fetchDeleteMindmap = createAsyncThunk("fetchDeleteMindmapList", async (id) => {
+    const response = await fetch(`https://mindmap.ndng.net/mindmap/${id}`, {
         method: "DELETE"
     });
 })

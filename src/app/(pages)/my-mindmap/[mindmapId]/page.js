@@ -1,17 +1,18 @@
 "use client"
 
-import { Fragment, useCallback, useEffect, useRef, useState } from "react"
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, useReactFlow, ReactFlowProvider } from "reactflow"
-import { useSelector, useDispatch } from "react-redux"
+import { Fragment, useCallback, useEffect, useRef } from "react"
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, useReactFlow, ReactFlowProvider, getIncomers, getOutgoers, getConnectedEdges} from "reactflow"
 
-import { fetchMindmapList } from "@/redux/middlewares/fetchMindmapList"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchMindmapId } from "@/redux/middlewares/fetchMindmapList"
+
+import { usePathname } from "next/navigation"
 
 import MindmapInfo from "./components/MindmapInfo"
 import NodeCustomFirst from "./components/NodeCustomFirst"
 import NodeCustom from "./components/NodeCustom"
 import EdgeCustom from "./components/EdgeCustom"
-
-import { usePathname } from "next/navigation"
+import { nanoid } from "nanoid"
 
 import 'reactflow/dist/style.css'
 import './styleNodeCustom.scss'
@@ -30,57 +31,43 @@ const connectionLineStyle = {
     stroke: "#5046E5"
 };
 
-let id = 0;
-const getId = () => `${id++}`;
-
 function MindmapPage() {
-    const mindmapList = useSelector((state) => state.mindmap.mindmapList);
-    const [currentMindmap, setCurrentMindmap] = useState({});
-    const nodeData = useRef([]);
-    const pathname = usePathname();
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchMindmapList());
-    }, []);
-
-    useEffect(() => {
-        const index = mindmapList.findIndex(obj => `/my-mindmap/${obj.id}` === pathname);
-
-        if (index > -1) {
-            nodeData.current = mindmapList[index].nodeData;
-            id = +nodeData.current[nodeData.current.length - 1].id + 1;
-
-            const tempMindmap = {
-                ...mindmapList[index],
-                flow: {
-                    ...mindmapList[index].flow,
-                    nodes: [
-                        ...mindmapList[index].flow.nodes.map((obj) => {
-                            return {
-                                ...obj,
-                                data: {
-                                    nodeData
-                                }
-                            }
-                        })
-                    ]
-                }
-            }
-
-            setCurrentMindmap(tempMindmap);
-        }
-    }, [mindmapList]);
-
-    useEffect(() => {
-        if (Object.keys(currentMindmap).length > 0) {
-            setNodes(currentMindmap.flow.nodes);
-            setEdges(currentMindmap.flow?.edges || []);
-        }
-    }, [currentMindmap])
+    const skipFirst = useRef(false)
+    const pathname = usePathname()
+    const dispatch = useDispatch()
+    const mindmap = useSelector((state) => state.mindmap.mindmap)
 
     const [nodes, setNodes, onNodesChange] = useNodesState([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
+
+    useEffect(() => {
+        if (!skipFirst.current) {
+            skipFirst.current = true
+            return
+        }
+
+        dispatch(fetchMindmapId(pathname.replace("/my-mindmap/", "")))
+        skipFirst.current = false
+    }, [])
+
+    useEffect(() => {
+        if (Object.keys(mindmap).length > 0) {
+            setNodes(() => {
+                let copy = [...mindmap.flow.nodes];
+                return copy.map((node) => {
+                    return {
+                        ...node,
+                        data: {
+                            ...node.data,
+                            setNodes,
+                        }
+                    }
+                })
+            });
+
+            setEdges(mindmap.flow.edges);
+        }
+    }, [mindmap])
 
     const connectingNodeId = useRef(null);
     const { screenToFlowPosition } = useReactFlow();
@@ -104,24 +91,23 @@ function MindmapPage() {
         const targetIsPane = event.target.classList.contains('react-flow__pane')
 
         if (targetIsPane) {
-            const id = getId()
-
             const newNode = {
-                id,
+                id: nanoid(),
                 position: screenToFlowPosition({
                     x: event.clientX,
                     y: event.clientY,
                 }),
                 data: {
-                    nodeData
+                    label: `New Node`,
+                    setNodes
                 },
                 type: "nodeCustom",
             }
 
             const newEdge = {
-                id,
+                id: nanoid(),
                 source: connectingNodeId.current,
-                target: id,
+                target: newNode.id,
                 type: "edgeCustom"
             }
 
@@ -135,35 +121,42 @@ function MindmapPage() {
         }
     }, [screenToFlowPosition])
 
-    const onNodesDelete = useCallback(
-        (deleted) => {
-            deleted.forEach(({ id }) => {
-                const index = nodeData.current.findIndex(obj => obj.id === id)
-                if (index !== -1) {
-                    const newNodeData = [...nodeData.current];
-                    newNodeData.splice(index, 1);
-                    nodeData.current = newNodeData;
-                }
-            })
-        },
-        [nodes, edges]
-    );
+    const { getNode } = useReactFlow();
+    function shouldNodeBeRemoved(node) {
+        if (node.type === 'nodeCustomFirst') return false;
+        return true;
+    }
+
+    const validateOnNodesChange = (changes) => {
+        const nextChanges = changes.reduce((acc, change) => {
+            if (change.type === 'remove') {
+              const node = getNode(change.id)
+      
+              if (shouldNodeBeRemoved(node)) {
+                return [...acc, change];
+              }
+              return acc;
+            }
+            return [...acc, change];
+        }, [])
+    
+        onNodesChange(nextChanges);
+    }
 
     return (
         <Fragment>
-            <MindmapInfo currentMindmap={ currentMindmap } setCurrentMindmap={ setCurrentMindmap } nodeData={ nodeData } nodes={ nodes } edges={ edges }/>
+            <MindmapInfo mindmap={mindmap} edges={edges} nodes={nodes} />
 
             <div style={{ width: "100vw", height: "70vh" }}>
                 <ReactFlow 
                     nodes = { nodes }
                     edges = { edges }
                     onConnect = { onConnect }
-                    onNodesChange = { onNodesChange }
+                    onNodesChange = { validateOnNodesChange }
                     onEdgesChange = { onEdgesChange }
                     connectionLineStyle={connectionLineStyle}
                     onConnectStart={onConnectStart}
                     onConnectEnd={onConnectEnd}
-                    onNodesDelete={onNodesDelete}
                     nodeTypes = { nodeTypes }
                     edgeTypes = { edgeTypes }
                     fitView

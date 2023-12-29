@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMindmapList, fetchUpdateMindmapList, fetchAddMindmapList, fetchDeleteMindmapList } from "../middlewares/fetchMindmapList";
+import { fetchMindmapList, fetchUpdateMindmap, fetchAddMindmap, fetchDeleteMindmap, fetchMindmapId } from "../middlewares/fetchMindmapList";
 
 const initialState = {
     mindmapList: [],
+    mindmap: {},
     status: 'idle'
 }
 
@@ -26,31 +27,41 @@ export const mindmapSlice = createSlice({
         .addCase(fetchMindmapList.rejected, (state) => {
             state.status = "rejected"
         })
-        .addCase(fetchUpdateMindmapList.fulfilled, (state, action) => {
+        .addCase(fetchUpdateMindmap.fulfilled, (state, action) => {
             state.status = "fulfilled"
         })
-        .addCase(fetchUpdateMindmapList.pending, (state) => {
+        .addCase(fetchUpdateMindmap.pending, (state) => {
             state.status = "pending"
         })
-        .addCase(fetchUpdateMindmapList.rejected, (state) => {
+        .addCase(fetchUpdateMindmap.rejected, (state) => {
             state.status = "rejected"
         })
-        .addCase(fetchAddMindmapList.fulfilled, (state, action) => {
+        .addCase(fetchAddMindmap.fulfilled, (state, action) => {
             state.status = "fulfilled"
         })
-        .addCase(fetchAddMindmapList.pending, (state) => {
+        .addCase(fetchAddMindmap.pending, (state) => {
             state.status = "pending"
         })
-        .addCase(fetchAddMindmapList.rejected, (state) => {
+        .addCase(fetchAddMindmap.rejected, (state) => {
             state.status = "rejected"
         })
-        .addCase(fetchDeleteMindmapList.fulfilled, (state, action) => {
+        .addCase(fetchDeleteMindmap.fulfilled, (state, action) => {
             state.status = "fulfilled"
         })
-        .addCase(fetchDeleteMindmapList.pending, (state) => {
+        .addCase(fetchDeleteMindmap.pending, (state) => {
             state.status = "pending"
         })
-        .addCase(fetchDeleteMindmapList.rejected, (state) => {
+        .addCase(fetchDeleteMindmap.rejected, (state) => {
+            state.status = "rejected"
+        })
+        .addCase(fetchMindmapId.fulfilled, (state, action) => {
+            state.mindmap = action.payload
+            state.status = "fulfilled"
+        })
+        .addCase(fetchMindmapId.pending, (state) => {
+            state.status = "pending"
+        })
+        .addCase(fetchMindmapId.rejected, (state) => {
             state.status = "rejected"
         })
     }

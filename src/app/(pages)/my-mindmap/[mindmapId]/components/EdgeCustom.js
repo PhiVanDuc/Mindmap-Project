@@ -11,11 +11,9 @@ export default function EdgeCustom({ id, sourceX, sourceY, targetX, targetY, sel
     });
 
     const styleEdge = {
-        // strokeWidth: "3px",
-        // stroke: "#5046E5"
         stroke: selected ? "rgb(55 48 187)" : `rgb(79, 70, 229)`,
         strokeWidth: 3,
-        opacity: selected ? "0.7" : "1"
+        opacity: selected ? "0.5" : "1"
     }
 
     return (
