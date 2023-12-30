@@ -1,12 +1,7 @@
 "use client"
 
-import { Fragment, useCallback, useEffect, useRef } from "react"
+import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, useReactFlow, ReactFlowProvider } from "reactflow"
-
-import { useSelector, useDispatch } from "react-redux"
-import { fetchMindmapId } from "@/redux/middlewares/fetchMindmapList"
-
-import { usePathname } from "next/navigation"
 
 import MindmapInfo from "./components/MindmapInfo"
 import NodeCustomFirst from "./components/NodeCustomFirst"
@@ -16,6 +11,7 @@ import { nanoid } from "nanoid"
 
 import 'reactflow/dist/style.css'
 import './styleNodeCustom.scss'
+import { fetchMindmap } from "@/app/api/actions/handleFetchData"
 
 const nodeTypes = {
     nodeCustomFirst: NodeCustomFirst,
@@ -31,24 +27,22 @@ const connectionLineStyle = {
     stroke: "#5046E5"
 };
 
-function MindmapPage() {
-    const skipFirst = useRef(false)
-    const pathname = usePathname()
-    const dispatch = useDispatch()
-    const mindmap = useSelector((state) => state.mindmap.mindmap)
-
+function MindmapPage({ id }) {
+    const mindmap = useRef({});
+    const loading = useRef(false);
     const [nodes, setNodes, onNodesChange] = useNodesState([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     useEffect(() => {
-        dispatch(fetchMindmapId(pathname.replace("/my-mindmap/", "")))
-    }, [])
+        (async () => {
+            loading.current = true;
+            const { data } = await fetchMindmap(id);
+            loading.current = false;
 
-    useEffect(() => {
-        if (Object.keys(mindmap).length > 0) {
+            mindmap.current = data;
+
             setNodes(() => {
-                let copy = [...mindmap.flow.nodes];
-                return copy.map((node) => {
+                return data.nodes.map((node) => {
                     return {
                         ...node,
                         data: {
@@ -58,10 +52,9 @@ function MindmapPage() {
                     }
                 })
             });
-
-            setEdges(mindmap.flow.edges);
-        }
-    }, [mindmap])
+            setEdges(data.edges);
+        })()
+    }, [])
 
     const connectingNodeId = useRef(null);
     const { screenToFlowPosition } = useReactFlow();
@@ -139,7 +132,7 @@ function MindmapPage() {
 
     return (
         <Fragment>
-            <MindmapInfo mindmap={mindmap} edges={edges} nodes={nodes} />
+            <MindmapInfo mindmap={mindmap} nodes={ nodes } edges={ edges } />
 
             <div style={{ width: "100vw", height: "70vh" }}>
                 <ReactFlow 
@@ -167,10 +160,11 @@ function MindmapPage() {
     )
 }
 
-export default function FlowProvier() {
+export default function FlowProvier({ params }) {
+    const { mindmapId: id } = params;
     return (
         <ReactFlowProvider>
-            <MindmapPage />
+            <MindmapPage id={id}/>
         </ReactFlowProvider>
     )
 }

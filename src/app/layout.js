@@ -2,7 +2,6 @@ import '@/assets/scss/globals.scss'
 import Navigation from "@/global_components/Navigation"
 import Footer from "@/global_components/Footer"
 import AuthProvider from './context/AuthProvider'
-import ReduxProvider from '@/redux/ReduxProvider'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -16,13 +15,11 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className='font-custom'>
             <body>
-                <ReduxProvider>
-                    <AuthProvider>
-                        <Navigation />
-                        {children}
-                        <Footer />
-                    </AuthProvider>
-                </ReduxProvider>
+                <AuthProvider>
+                    <Navigation />
+                    {children}
+                    <Footer />
+                </AuthProvider>
 
                 <ToastContainer />
             </body>

@@ -29,6 +29,8 @@
         }
 
         .mindmap-buttons {
+            display: flex;
+
             button {
                 display: inline-flex;
                 align-items: center;

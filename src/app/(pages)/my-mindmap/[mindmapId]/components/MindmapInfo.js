@@ -1,63 +1,64 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchUpdateMindmap } from '@/redux/middlewares/fetchMindmapList';
+import React, { useEffect, useState } from 'react';
+import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 
 import './style.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function MindmapInfo({ mindmap, edges, nodes }) {
-    const dispatch = useDispatch();
+export default function MindmapInfo({ mindmap, nodes, edges }) {
+    const [name, setName] = useState("");
+    const [desc, setDesc] = useState("");
 
     useEffect(() => {
-        if (Object.keys(mindmap).length > 0) {
-            setMindmapName(mindmap.name);
-            setMindmapDesc(mindmap.desc);
+        if (Object.keys(mindmap.current).length > 0) {
+            setName(mindmap.current.name);
+            setDesc(mindmap.current.desc);
         }
-    }, [mindmap]);
-
-    const [mindmapName, setMindmapName] = useState(mindmap?.name || "");
-    const [mindmapDesc, setMindmapDesc] = useState(mindmap?.desc || "");
+    }, [mindmap.current]);
 
     const handleChangeName = (event) => {
-        setMindmapName(event.target.value);
+        setName(event.target.value);
     }
 
     const handleChangeDesc = (event) => {
-        setMindmapDesc(event.target.value);
+        setDesc(event.target.value);
     }
 
-    const handleClickSaveData = () => {
-        let copyNodes = [...nodes];
-        copyNodes = copyNodes.map((node) => {
-            delete node.data.setNodes;
-            return node;
+    const handleClickSave = async () => {
+        const saveNodes = nodes.map((node) => {
+            return {
+                ...node,
+                data: {
+                    label: node.data.label
+                }
+            }
         })
 
-        let copyMindmap = {
-            ...mindmap,
-            name: mindmapName,
-            desc: mindmapDesc,
-            flow: {
-                nodes: copyNodes,
-                edges: edges, 
-            }
+        const save = {
+            ...mindmap.current,
+            name,
+            desc,
+            nodes: saveNodes,
+            edges
         }
 
-        dispatch(fetchUpdateMindmap(copyMindmap));        
+        const response = await fetchSaveMindmap(save);
+        if (response.ok) {
+            console.log('OK');
+        }
     }
 
     return (
         <header className="mindmap-info">
             <div className="container">
                 <div className="mindmap-inputs">
-                    <input type="text" className="input-mindmap-name" value={ mindmapName } onChange={ handleChangeName }/>
-                    <textarea className="textarea-mindmap-desc" value={ mindmapDesc } onChange={ handleChangeDesc }></textarea>
+                    <input type="text" className="input-mindmap-name" value={ name } onChange={ handleChangeName } />
+                    <textarea className="textarea-mindmap-desc" value={ desc } onChange={ handleChangeDesc }></textarea>
                 </div>
 
                 <div className="mindmap-buttons">
-                    <button onClick={ handleClickSaveData }>
+                    <button onClick={ handleClickSave }>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                             <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clipRule="evenodd" />
                         </svg>

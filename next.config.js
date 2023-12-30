@@ -8,6 +8,9 @@ const nextConfig = {
                 permanent: true
             }
         ]
+    },
+    env: {
+        API_SERVER: process.env.API_SERVER
     }
 }
 
