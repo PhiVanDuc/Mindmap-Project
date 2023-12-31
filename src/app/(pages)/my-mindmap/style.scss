@@ -121,6 +121,14 @@
                     &:hover {
                         background-color: $base_light_color;
                         cursor: pointer;
+
+                        // .table-data {
+                        //     &:last-child {
+                        //         span:first-child {
+                        //             z-index: 1;
+                        //         }
+                        //     }
+                        // }
                     }
 
                     .table-data {
@@ -175,11 +183,10 @@
                                 width: 20px;
                                 height: 20px;
                                 cursor: pointer;
-                            }
 
-                            span:first-child {
-                                margin-right: 20px;
-                                z-index: 0;
+                                &:first-child {
+                                    margin-right: 20px;
+                                }
                             }
                         }
                     }
