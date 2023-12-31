@@ -179,8 +179,7 @@
 
                             span:first-child {
                                 margin-right: 20px;
-                                top: 50%;
-                                transform: translate(0% -50%);
+                                z-index: 0;
                             }
                         }
                     }
