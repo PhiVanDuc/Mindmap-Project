@@ -5,6 +5,7 @@ import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 
 import './style.scss'
 import 'react-toastify/dist/ReactToastify.css';
+import notify from '@/app/utils/notify';
 
 export default function MindmapInfo({ mindmap, nodes, edges }) {
     const [name, setName] = useState("");
@@ -43,10 +44,11 @@ export default function MindmapInfo({ mindmap, nodes, edges }) {
             edges
         }
 
+        notify("warn", "Chờ trong giây lát...")
         const response = await fetchSaveMindmap(save);
-        if (response.ok) {
-            console.log('OK');
-        }
+        
+        if (response === "ok") notify("success", "Lưu thành công!")
+        else notify("error", "Lưu thất bại!")
     }
 
     return (

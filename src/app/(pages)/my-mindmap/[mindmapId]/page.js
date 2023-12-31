@@ -12,6 +12,8 @@ import { nanoid } from "nanoid"
 import 'reactflow/dist/style.css'
 import './styleNodeCustom.scss'
 import { fetchMindmap } from "@/app/api/actions/handleFetchData"
+import Loading from "@/app/utils/Loading"
+import notify from "@/app/utils/notify"
 
 const nodeTypes = {
     nodeCustomFirst: NodeCustomFirst,
@@ -36,23 +38,26 @@ function MindmapPage({ id }) {
     useEffect(() => {
         (async () => {
             loading.current = true;
-            const { data } = await fetchMindmap(id);
+            const { response, data } = await fetchMindmap(id);
             loading.current = false;
 
-            mindmap.current = data;
+            if (response.ok) {
+                mindmap.current = data;
 
-            setNodes(() => {
-                return data.nodes.map((node) => {
-                    return {
-                        ...node,
-                        data: {
-                            ...node.data,
-                            setNodes,
+                setNodes(() => {
+                    return data.nodes.map((node) => {
+                        return {
+                            ...node,
+                            data: {
+                                ...node.data,
+                                setNodes,
+                            }
                         }
-                    }
-                })
-            });
-            setEdges(data.edges);
+                    })
+                });
+                setEdges(data.edges);
+           }
+           else notify("error", "Load mindmap thất bại!");
         })()
     }, [])
 
@@ -156,6 +161,10 @@ function MindmapPage({ id }) {
                     <Background variant = "dots" color = "#EBE3D5" gap = "30" size = "4" />
                 </ReactFlow >
             </div>
+
+            {
+                loading.current && <Loading />
+            }
         </Fragment>
     )
 }

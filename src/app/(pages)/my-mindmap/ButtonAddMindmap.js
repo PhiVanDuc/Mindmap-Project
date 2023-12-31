@@ -3,8 +3,12 @@
 import { fetchAddMindmap } from '@/app/api/actions/handleClientSide';
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/navigation';
+import { Fragment, useState } from 'react';
+import Loading from '@/app/utils/Loading';
+import notify from '@/app/utils/notify';
 
 export default function ButtonAddMindmap({ session }) {
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleClickAddMindmap = async () => {
@@ -40,13 +44,25 @@ export default function ButtonAddMindmap({ session }) {
             created_at: formattedTime
         }
         
+        setLoading(true);
         const response = await fetchAddMindmap(newMindmap);
-        if (response === "ok") {
+        
+        if (response) {
             router.push(`/my-mindmap/${newMindmap.id}`)
+            notify("success", "Tạo mindmap thành công!")
+        }
+        else {
+            setLoading(false);
         }
     }
 
     return (
-        <button className="button-new-mindmap" onClick={ handleClickAddMindmap }>Thêm mới</button>
+        <Fragment>
+            <button className="button-new-mindmap" onClick={ handleClickAddMindmap }>Thêm mới</button>
+        
+            {
+                loading && <Loading />
+            }
+        </Fragment>
     )
 }

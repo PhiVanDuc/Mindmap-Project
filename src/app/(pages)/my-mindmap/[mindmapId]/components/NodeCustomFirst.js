@@ -48,8 +48,11 @@ export default function NodeCustomFirst({ id, data, isConnectable }) {
     };
 
     const handleDocumentClick = (event) => {
+        const target = event.target;
+        const tagName = target.tagName.toLowerCase();
+
         if (!clickedOnNode.current) {
-            if (event.target.className === "overlay" && event.ctrlKey) return;
+            if ((event.target.className === "overlay" && event.ctrlKey)  || (event.ctrlKey && tagName === "path")) return;
             nodeCustom.current.style.backgroundColor = "rgb(139,195,74)";
             overlay.current.zIndex = "1";
         }

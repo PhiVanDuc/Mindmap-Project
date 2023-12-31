@@ -1,54 +1,48 @@
 {
   "mindmap": [
     {
-      "id": "78c7d1f3-344e-4687-9df5-68841aa5cd90",
-      "name": "Mindmap",
+      "id": "3df8b034-2506-450e-a3ab-d4c8a71e1f06",
+      "name": "Mindmap không có tên",
       "desc": "Chưa có mô tả",
       "nodes": [
         {
           "id": "root",
           "data": {
-            "label": "My"
+            "label": "My Mindmap"
           },
           "position": {
             "x": 0,
             "y": 0
           },
-          "type": "nodeCustomFirst",
-          "selected": false,
-          "dragging": false
-        },
-        {
-          "id": "iX6BAyVfBDMONylyQY9Dl",
-          "position": {
-            "x": -206.2789024289849,
-            "y": 146.7685627669403
-          },
-          "data": {
-            "label": "New"
-          },
-          "type": "nodeCustom",
-          "width": 250,
-          "height": 60,
-          "selected": false,
-          "positionAbsolute": {
-            "x": -206.2789024289849,
-            "y": 146.7685627669403
-          },
-          "dragging": false
+          "type": "nodeCustomFirst"
         }
       ],
-      "edges": [
-        {
-          "id": "m5DBPIHXbqA5rwu6GZ29o",
-          "source": "root",
-          "target": "iX6BAyVfBDMONylyQY9Dl",
-          "type": "edgeCustom"
-        }
-      ],
+      "edges": [],
       "isAccessible": false,
       "email": "phivanduc325@gmail.com",
-      "created_at": "2023/12/30 22:29:58"
+      "created_at": "2023/12/31 10:23:51"
+    },
+    {
+      "id": "b2f0e007-a862-496c-b881-9143e65cdea1",
+      "name": "Mindmap không có tên",
+      "desc": "Chưa có mô tả",
+      "nodes": [
+        {
+          "id": "root",
+          "data": {
+            "label": "My Mindmap"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "type": "nodeCustomFirst"
+        }
+      ],
+      "edges": [],
+      "isAccessible": false,
+      "email": "phivanduc325@gmail.com",
+      "created_at": "2023/12/31 10:24:38"
     }
   ]
 }

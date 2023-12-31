@@ -24,6 +24,7 @@ export const fetchDeleteMindmap = async (id) => {
 
     if (response.ok) {
         revalidateTag("get_mindmap_list")
-        return "ok";
+        return response.ok;
     }
+    else return response.ok;
 }

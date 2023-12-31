@@ -23,10 +23,6 @@ export default function NavLink() {
             <li className="nav-item">
                 <Link href="/prices" className={ pathname === "/prices" ? "nav-link active" : "nav-link" }>Bảng giá</Link>
             </li>
-
-            <li className="nav-item">
-                <Link href="/contact" className={ pathname === "/contact" ? "nav-link active" : "nav-link" }>Liên hệ</Link>
-            </li>
         </ul>
     )
 }
