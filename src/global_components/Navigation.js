@@ -30,7 +30,7 @@ export default async function Navigation() {
                                         <ButtonSignOut />
                                     </Fragment>
                                 ) : (
-                                    <Link href="/api/auth/login" className="button-login">Đăng nhập</Link>
+                                    <Link href="/login" className="button-login">Đăng nhập</Link>
                                 )
                             }
                         </div>

@@ -17,7 +17,7 @@ const options = {
     secret: process.env.NEXTAUTH_SECRET,
 
     pages: {
-        signIn: "/api/auth/login"
+        signIn: "/login"
     }
 }
 

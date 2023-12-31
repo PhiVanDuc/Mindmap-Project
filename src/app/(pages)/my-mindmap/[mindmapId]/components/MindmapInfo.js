@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 
 import './style.scss'
@@ -8,15 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import notify from '@/app/utils/notify';
 
 export default function MindmapInfo({ mindmap, nodes, edges }) {
-    const [name, setName] = useState("");
-    const [desc, setDesc] = useState("");
-
-    useEffect(() => {
-        if (Object.keys(mindmap.current).length > 0) {
-            setName(mindmap.current.name);
-            setDesc(mindmap.current.desc);
-        }
-    }, [mindmap.current]);
+    const [name, setName] = useState(mindmap.name);
+    const [desc, setDesc] = useState(mindmap.desc);
 
     const handleChangeName = (event) => {
         setName(event.target.value);
@@ -37,7 +30,7 @@ export default function MindmapInfo({ mindmap, nodes, edges }) {
         })
 
         const save = {
-            ...mindmap.current,
+            ...mindmap,
             name,
             desc,
             nodes: saveNodes,

@@ -23,7 +23,7 @@ export const fetchDeleteMindmap = async (id) => {
     })
 
     if (response.ok) {
-        revalidateTag("get_mindmap_list")
+        revalidateTag(["get_mindmap_list", "fetch-middleware"])
         return response.ok;
     }
     else return response.ok;
