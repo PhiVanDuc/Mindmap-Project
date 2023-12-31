@@ -8,6 +8,6 @@ export const fetchMindmapList = async () => {
         return response.json();
     }
     catch(e) {
-        return "Error " + e.message;
+        return "error";
     }
 }

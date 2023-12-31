@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment } from 'react'
+import { Fragment, useCallback, useRef } from 'react'
 import Link from 'next/link'
 
 import { fetchDeleteMindmap } from "@/app/api/actions/handleClientSide"
@@ -10,22 +10,28 @@ import notify from '@/app/utils/notify';
 
 export default function TableMindmapList({ session, mindmapList }) {
     const router = useRouter();
+    const checkEmpty = useRef(false);
 
     const handleClickDelete = (id) => {
         const method = async (id) => {
             notify("warn", "Chờ trong giây lát...")
             const response = await fetchDeleteMindmap(id);
-    
-            if (response) notify("success", "Xóa mindmap thành công!");
+            if (response) {
+                notify("success", "Xóa mindmap thành công!");
+            }
             else notify("error", "Xóa mindmap thất bại!");
         }
 
-        notify("warn", "Bạn có chắc muốn?", true, () => { method(id) })
+        notify("warn", "Xác nhận xóa mindmap?", true, () => { method(id) })
     }
 
     const handleClickEdit = (id) => {
         router.push(`/my-mindmap/${id}`);
     }
+
+    checkEmpty.current = mindmapList.some((mindmap) => {
+        return mindmap.email === session.user.email;
+    })
 
     return (
         <Fragment>
@@ -54,8 +60,6 @@ export default function TableMindmapList({ session, mindmapList }) {
                     {
                         mindmapList === "error" ?
                         ( <h3>Error load data</h3> ) : 
-                        Array.isArray(mindmapList) && mindmapList.length === 0 ?
-                        ( <h3>Mindmap empty</h3> ) :
                         Array.isArray(mindmapList) && mindmapList.length > 0 &&
                         (
                             mindmapList.map(({ id, name, desc, email, created_at }) => {
@@ -94,6 +98,10 @@ export default function TableMindmapList({ session, mindmapList }) {
                                 }
                             })
                         )
+                    }
+
+                    {
+                        !checkEmpty.current && <h3>Mindmap empty</h3>
                     }
                 </main>
             </div>
