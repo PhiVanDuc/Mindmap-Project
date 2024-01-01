@@ -51,9 +51,9 @@ export default function ShareBox({ session, mindmap }) {
         const response = await fetchSaveMindmap({
             ...mindmap,
             metadata: {
-                ...mindmap.metadata,
                 name: nameShare,
-                desc: descShare
+                desc: descShare,
+                image: `${originUrl.current}${mindmap.metadata.image}`
             },
             isAccessible
         });
