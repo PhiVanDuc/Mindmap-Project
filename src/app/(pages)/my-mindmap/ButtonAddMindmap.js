@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
 import Loading from '@/app/utils/Loading';
 import notify from '@/app/utils/notify';
+import shareImg from '@/assets/images/so-do-tu-duy.webp'
 
 export default function ButtonAddMindmap({ session }) {
     const [loading, setLoading] = useState(false);
@@ -42,8 +43,7 @@ export default function ButtonAddMindmap({ session }) {
             metadata: {
                 name: "Mindmap không có tên",
                 desc: "",
-                image: "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg",
-                url: "https://mindmap-project-seven.vercel.app"
+                image: `${shareImg.src}`
             },
             isAccessible: false,
             email: session?.user?.email,

@@ -139,12 +139,13 @@ function Flow({ mindmap, session }) {
                     nodeTypes = { nodeTypes }
                     edgeTypes = { edgeTypes }
                     fitView
+                    fitViewOptions={{ maxZoom: 1.5 }}
                     multiSelectionKeyCode = "Control"
                     deleteKeyCode = "Delete"
                     nodeOrigin={[0.5, 0]}
                 >
                     <Controls />
-                    <MiniMap zoomable pannable nodeStrokeWidth={5} zoomStep={1} />
+                    <MiniMap zoomable pannable nodeStrokeWidth={5} nodeBorderRadius={10} zoomStep={1} nodeColor="#FFCC00" position="top-left" />
                     <Background variant = "dots" color = "#EBE3D5" gap = "30" size = "4" />
                 </ReactFlow >
             </div>

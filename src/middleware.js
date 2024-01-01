@@ -24,7 +24,10 @@ export const middleware = async (req) => {
     const loginUrl = new URL("/login", fullUrl);
 
     if (pathname.startsWith(`/my-mindmap/${pathname.replace("/my-mindmap/", "")}`)) {
-        if (!data.isAccessible && data.email !== jwt?.email) {
+        if (Object.keys(data).length === 0) {
+            return NextResponse.rewrite(new URL("/404", fullUrl));
+        }
+        else if (!data.isAccessible && data.email !== jwt?.email) {
             return NextResponse.redirect(homeUrl);
         }
         else if (data.isAccessible && data.email !== jwt?.email) {
