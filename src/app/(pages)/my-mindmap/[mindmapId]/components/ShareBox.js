@@ -8,7 +8,7 @@ import notify from '@/app/utils/notify';
 
 import './styleShareBox.scss'
 
-export default function ShareBox({ mindmap }) {
+export default function ShareBox({ session, mindmap }) {
     const fullUrl = useRef("");
     const router = useRouter();
     const [toggle, setToggle] = useState("private");
@@ -36,6 +36,11 @@ export default function ShareBox({ mindmap }) {
     }
 
     const handleClickSaveShare = async () => {
+        if (session?.user?.email !== mindmap.email) {
+            notify("warn", "Bạn không thể sửa mindmap!");
+            return;
+        }
+
         let isAccessible;
         if (toggle === "private") isAccessible = false
         else isAccessible = true

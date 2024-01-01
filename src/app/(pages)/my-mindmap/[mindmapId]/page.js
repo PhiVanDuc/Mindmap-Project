@@ -16,7 +16,8 @@ export const generateMetadata = async ({ params }) => {
         openGraph: {
             title: mindmap.metadata.name,
             description: mindmap.metadata.desc,
-            images: [mindmap.metadata.image]
+            images: [mindmap.metadata.image],
+            url: mindmap.metadata.url,
         }
     }
 }

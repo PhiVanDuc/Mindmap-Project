@@ -9,7 +9,7 @@ import notify from '@/app/utils/notify';
 import './style.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function MindmapInfo({ mindmap, nodes, edges }) {
+export default function MindmapInfo({ session, mindmap, nodes, edges }) {
     const [name, setName] = useState(mindmap.name);
     const [desc, setDesc] = useState(mindmap.desc);
 
@@ -22,6 +22,11 @@ export default function MindmapInfo({ mindmap, nodes, edges }) {
     }
 
     const handleClickSave = async () => {
+        if (session?.user?.email !== mindmap.email) {
+            notify("warn", "Bạn không thể sửa mindmap!");
+            return;
+        }
+
         const saveNodes = nodes.map((node) => {
             return {
                 ...node,
@@ -73,7 +78,7 @@ export default function MindmapInfo({ mindmap, nodes, edges }) {
                 </div>
             </header>
 
-            <ShareBox mindmap={ mindmap } />
+            <ShareBox mindmap={ mindmap } session={ session } />
         </Fragment>
     )
 }

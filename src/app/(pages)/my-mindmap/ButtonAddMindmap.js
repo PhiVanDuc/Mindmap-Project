@@ -42,7 +42,8 @@ export default function ButtonAddMindmap({ session }) {
             metadata: {
                 name: "Mindmap không có tên",
                 desc: "",
-                image: "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg"
+                image: "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg",
+                url: "https://mindmap-project-seven.vercel.app"
             },
             isAccessible: false,
             email: session?.user?.email,
