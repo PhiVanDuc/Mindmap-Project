@@ -12,7 +12,6 @@ import { nanoid } from "nanoid"
 import 'reactflow/dist/style.css'
 import './styleNodeCustom.scss'
 import Loading from "@/app/utils/Loading"
-import { useRouter } from "next/navigation"
 
 const nodeTypes = {
     nodeCustomFirst: NodeCustomFirst,
@@ -29,17 +28,11 @@ const connectionLineStyle = {
 };
 
 function Flow({ mindmap, session }) {
-    const router = useRouter();
     const loading = useRef(false);
     const [nodes, setNodes, onNodesChange] = useNodesState([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     useEffect(() => {
-        // if (!mindmap.isAccessible && mindmap.email !== session?.user?.email) {
-        //     router.push("/");
-        //     return;
-        // }
-
         setNodes(() => {
             return mindmap.nodes.map((node) => {
                 return {
@@ -131,7 +124,7 @@ function Flow({ mindmap, session }) {
 
     return (
         <Fragment>
-            <MindmapInfo mindmap={mindmap} nodes={ nodes } edges={ edges } />
+            <MindmapInfo mindmap={mindmap} nodes={ nodes } edges={ edges } session={ session } />
 
             <div style={{ width: "100vw", height: "70vh" }}>
                 <ReactFlow 

@@ -6,6 +6,20 @@ import { fetchMindmap } from "@/app/api/actions/handleServerSide";
 
 import options from "@/app/api/auth/[...nextauth]/options";
 
+export const generateMetadata = async ({ params }, parent) => {
+    const { mindmapId } = params
+    const mindmap = await fetchMindmap(mindmapId);
+    const parentImage = (await parent).openGraph?.images || [];
+
+    return {
+        title: mindmap.metadata.name,
+        description: mindmap.metadata.desc,
+        openGraph: {
+            images: [mindmap.metadata.image, ...parentImage]
+        }
+    }
+}
+
 function isObject(value) {
     return (
         typeof value === 'object' &&

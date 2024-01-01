@@ -27,6 +27,9 @@ export const middleware = async (req) => {
         if (!data.isAccessible && data.email !== jwt?.email) {
             return NextResponse.redirect(homeUrl);
         }
+        else if (data.isAccessible && data.email !== jwt?.email) {
+            return NextResponse.next();
+        }
     }
 
     if (pathname.startsWith("/login")) {

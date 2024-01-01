@@ -31,6 +31,7 @@
         .mindmap-buttons {
             display: flex;
 
+            label,
             button {
                 display: inline-flex;
                 align-items: center;
@@ -48,11 +49,11 @@
                     height: 25px;
                     margin-right: 15px;
                 }
+            }
 
-                &:last-child {
-                    margin-right: 0;
-                    background-color: rgb(30,78,217);
-                }
+            label {
+                margin-right: 0;
+                background-color: rgb(30,78,217);
             }
         }
     }

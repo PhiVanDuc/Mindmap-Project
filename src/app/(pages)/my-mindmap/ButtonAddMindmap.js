@@ -39,6 +39,11 @@ export default function ButtonAddMindmap({ session }) {
                 }
             ],
             edges: [],
+            metadata: {
+                name: "Mindmap không có tên",
+                desc: "",
+                image: "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg"
+            },
             isAccessible: false,
             email: session?.user?.email,
             created_at: formattedTime

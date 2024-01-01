@@ -5,7 +5,6 @@ import AuthProvider from './context/AuthProvider'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import Loading from './utils/Loading'
 
 export const metadata = {
   title: 'Create Next App',

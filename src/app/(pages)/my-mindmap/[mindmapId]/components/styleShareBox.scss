@@ -1,0 +1,204 @@
+@import '../../../../../assets/scss/variables.scss';
+
+#toggle-share-box:checked ~ .share-box {
+    visibility: visible;
+    opacity: 1;
+
+    .share-box-structure {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+#toggle-share-private:checked ~ .share-box {
+    .share-box-structure {
+        .show-private {
+            background-color: $light_purple_button;
+            color: white;
+
+            &::before {
+                top: 7px;
+                left: 7px;
+            }
+        }
+
+        .share-box-body {
+            .body-private {
+                display: block;
+            }
+        }
+    }
+}
+
+#toggle-share-public:checked ~ .share-box {
+    .share-box-structure {
+        .show-public {
+            background-color: $light_purple_button;
+            color: white;
+
+            &::before {
+                top: 7px;
+                left: 7px;
+            }
+        }
+
+        .share-box-body {
+            .body-public {
+                display: block;
+            }
+        }
+    }
+}
+
+.share-box {
+    position: fixed;
+    inset: 0;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(54, 54, 54, 0.4);
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .share-box-structure {
+        scale: 0;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 700px;
+        translate: -50% -50%;
+        background-color: white;
+        border-radius: 8px;
+        padding: 50px;
+        z-index: 4;
+        transition: 0.5s linear;
+        transition-property: scale, opacity;
+
+        .share-box-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 30px;
+
+            label {
+                position: relative;
+                font-size: 1.7rem;
+                font-weight: 700;
+                color: rgb(74, 74, 74);
+                padding: 15px 30px;
+                border-radius: 6px;
+                width: 46%;
+                text-align: center;
+                cursor: pointer;
+                transition: 0.4s linear;
+                transition-property: color, background-color;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 6px;
+                    border: 2px solid rgb(63, 44, 34);
+                    transition: 0.4s linear;
+                    transition-property: top, left;
+                }
+            }
+        }
+
+        .share-box-body {
+            width: 100%;
+            margin-bottom: 30px;
+
+            .body-private {
+                display: none;
+
+                p {
+                    text-align: center;
+                    font-size: 1.8rem;
+                    font-weight: 600;
+                }
+            }
+
+            .body-public {
+                display: none;
+
+                .group {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 20px;
+
+                    label {
+                        width: fit-content;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                    }
+
+                    input {
+                        padding: 10px 15px;
+                        border-radius: 5px;
+                        background-color: rgb(249,250,251);
+                        transition: background-color 0.4s linear;
+                        font-size: 1.5rem;
+                        font-weight: 600;
+
+                        &:focus {
+                            background-color: transparent;
+                            outline: 2px solid rgb(148, 148, 148);
+                        }
+                    }
+
+                    textarea {
+                        padding: 10px 15px;
+                        border-radius: 5px;
+                        background-color: rgb(249,250,251);
+                        transition: background-color 0.4s linear;
+                        resize: none;
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        overflow-y: hidden;
+
+                        &:focus {
+                            background-color: transparent;
+                            outline: 2px solid rgb(148, 148, 148);
+                        }
+                    }
+                }
+            }
+        }
+
+        .share-box-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            label {
+                position: relative;
+                font-size: 1.7rem;
+                font-weight: 700;
+                color: rgb(74, 74, 74);
+                padding: 15px 30px;
+                border-radius: 6px;
+                border: 2px solid rgb(63, 44, 34);
+                width: 24%;
+                text-align: center;
+                cursor: pointer;
+
+                &:last-child {
+                    width: 74%;
+                }
+            }
+        }
+    }
+}
