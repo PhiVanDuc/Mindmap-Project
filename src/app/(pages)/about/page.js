@@ -7,7 +7,8 @@ import person_3_image from '@/assets/images/person-3.png';
 import person_4_image from '@/assets/images/person-4.png';
 
 export const metadata = {
-    title: "About Page"
+    title: "About Page",
+    description: "Know more about us"
 }
 
 export default function AboutPage() {

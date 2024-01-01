@@ -7,6 +7,11 @@ import TableMindmapList from './TableMindmapList';
 
 import './style.scss'
 
+export const metadata = {
+    title: "My Mindmap Page",
+    description: "Manage your mindmap list"
+}
+
 export default async function MyMindmapPage() {
     const session = await getServerSession(options);
     const mindmapList = await fetchMindmapList();

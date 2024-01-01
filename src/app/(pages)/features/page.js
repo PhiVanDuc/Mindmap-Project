@@ -1,5 +1,10 @@
 import './style.scss';
 
+export const metadata = {
+    title: "Features page",
+    description: "Know more about Features"
+}
+
 export default function FeaturesPage() {
     return (
         <main className="features-page">

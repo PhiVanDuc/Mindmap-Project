@@ -4,6 +4,11 @@ import price_1 from '@/assets/images/abstract-1.jpg'
 import price_2 from '@/assets/images/abstract-2.jpg'
 import price_3 from '@/assets/images/abstract-3.jpg'
 
+export const metadata = {
+    title: "Prices Page",
+    description: "Know more about prices"
+}
+
 export default function PricesPage() {
     return (
         <main className='prices-page'>
