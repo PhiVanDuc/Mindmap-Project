@@ -3,7 +3,7 @@
 import { revalidateTag } from "next/cache"
 
 export const fetchAddMindmap = async (body) => {
-    const response = await fetch(`${ process.env.API_SERVER }`, {
+    const response = await fetch(`${ process.env.API }`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -18,7 +18,7 @@ export const fetchAddMindmap = async (body) => {
 }
 
 export const fetchDeleteMindmap = async (id) => {
-    const response = await fetch(`${process.env.API_SERVER}/${id}`, {
+    const response = await fetch(`${process.env.API}/${id}`, {
         method: "DELETE"
     })
 

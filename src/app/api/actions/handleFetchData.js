@@ -2,7 +2,7 @@
 
 export const fetchSaveMindmap = async (body) => {
     try {
-        const response = await fetch(`${process.env.API_SERVER}/${body.id}`, {
+        const response = await fetch(`${process.env.API}/${body.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
