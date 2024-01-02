@@ -1,4 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-ExtraBold.ttf');
+}
 
 * {
     margin: 0;
