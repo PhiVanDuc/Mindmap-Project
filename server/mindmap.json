@@ -1,58 +1,86 @@
 {
   "mindmap": [
     {
-      "id": "b65d1880-3361-4e16-a8ac-719c8f1863f7",
-      "name": "Mindmap không có tên",
+      "id": "315c0c44-17cb-457b-ae10-4399ab57c547",
+      "name": "yeu em",
       "desc": "Chưa có mô tả",
       "nodes": [
         {
           "id": "root",
           "data": {
-            "label": "My Mindmap"
+            "label": "duc porn "
           },
           "position": {
-            "x": 0,
-            "y": 0
+            "x": -29.333333333333336,
+            "y": -71.33333333333333
           },
-          "type": "nodeCustomFirst"
-        }
-      ],
-      "edges": [],
-      "metadata": {
-        "name": "Mindmap không có tên",
-        "desc": "",
-        "image": "/_next/static/media/so-do-tu-duy.913b15fe.webp"
-      },
-      "isAccessible": false,
-      "email": "phid808@gmail.com",
-      "created_at": "2024/01/02 11:58:16"
-    },
-    {
-      "id": "027e361e-8ede-4318-8133-a49a591f804c",
-      "name": "Mindmap không có tên",
-      "desc": "Chưa có mô tả",
-      "nodes": [
+          "type": "nodeCustomFirst",
+          "width": 250,
+          "height": 60,
+          "selected": false,
+          "dragging": false,
+          "positionAbsolute": {
+            "x": -29.333333333333336,
+            "y": -71.33333333333333
+          }
+        },
         {
-          "id": "root",
-          "data": {
-            "label": "My Mindmap"
-          },
+          "id": "JAs4CW-oJ7lp2E-Mj7V30",
           "position": {
-            "x": 0,
-            "y": 0
+            "x": -167.33333333333334,
+            "y": 62.82916666666665
           },
-          "type": "nodeCustomFirst"
+          "data": {
+            "label": "javhd"
+          },
+          "type": "nodeCustom",
+          "width": 250,
+          "height": 60,
+          "selected": false,
+          "dragging": false
+        },
+        {
+          "id": "XXWVf9I4efjqUWaaeAGZc",
+          "position": {
+            "x": 128.33333333333331,
+            "y": 60.49583333333332
+          },
+          "data": {
+            "label": "vlxx.edu"
+          },
+          "type": "nodeCustom",
+          "width": 250,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 128.33333333333331,
+            "y": 60.49583333333332
+          },
+          "dragging": false
         }
       ],
-      "edges": [],
+      "edges": [
+        {
+          "id": "iHtqx6kIAH8Ead9vjPBN6",
+          "source": "root",
+          "target": "JAs4CW-oJ7lp2E-Mj7V30",
+          "type": "edgeCustom"
+        },
+        {
+          "id": "45kicEySp_RhwPIKF8NNP",
+          "source": "root",
+          "target": "XXWVf9I4efjqUWaaeAGZc",
+          "type": "edgeCustom"
+        }
+      ],
       "metadata": {
         "name": "Mindmap không có tên",
         "desc": "",
-        "image": "/_next/static/media/so-do-tu-duy.913b15fe.webp"
+        "image": "http://localhost:3000/_next/static/media/so-do-tu-duy.913b15fe.webp"
       },
-      "isAccessible": false,
-      "email": "phid808@gmail.com",
-      "created_at": "2024/01/02 12:04:03"
+      "isAccessible": true,
+      "email": "phivanduc325@gmail.com",
+      "created_at": "2024/01/02 14:47:29"
     }
   ]
 }

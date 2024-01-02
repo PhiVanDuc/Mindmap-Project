@@ -5,11 +5,13 @@ import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 
 import ShareBox from './ShareBox';
 import notify from '@/app/utils/notify';
+import { useRouter } from 'next/navigation';
 
 import './style.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MindmapInfo({ session, mindmap, nodes, edges }) {
+    const router = useRouter();
     const [name, setName] = useState(mindmap.name);
     const [desc, setDesc] = useState(mindmap.desc);
 
@@ -47,7 +49,10 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
         notify("warn", "Chờ trong giây lát...")
         const response = await fetchSaveMindmap(save);
         
-        if (response === "ok") notify("success", "Lưu thành công!")
+        if (response === "ok") {
+            router.refresh();
+            notify("success", "Lưu thành công!")
+        }
         else notify("error", "Lưu thất bại!")
     }
 
