@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useCallback, useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 
 import { fetchDeleteMindmap } from "@/app/api/actions/handleClientSide"
@@ -39,7 +39,7 @@ export default function TableMindmapList({ session, mindmapList }) {
                 <header className='table-header'>
                     <div className="table-row">
                         <div className="table-data">
-                            <input type="checkbox" style={{ zIndex: -1 }} />
+                            <input type="checkbox" className='input-main' />
                         </div>
 
                         <div className="table-data">

@@ -2,7 +2,7 @@ import { revalidateTag } from "next/cache";
 
 export const fetchMindmapList = async () => {
     try {
-        const response = await fetch(`${ process.env.API_SERVER }`, {
+        const response = await fetch(`${ process.env.API_SERVER }?_sort=created_at&_order=desc`, {
             next: {
                 tags: ["get_mindmap_list"]
             }
