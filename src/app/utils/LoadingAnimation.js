@@ -1,6 +1,6 @@
 import './styleLoading.scss'
 
-export default function Loading() {
+export default function LoadingAnimation() {
     return (
         <div className="wrap">
             <div className="boxes">

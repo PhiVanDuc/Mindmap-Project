@@ -1,7 +1,7 @@
 import './style.scss';
 
 import { Suspense } from 'react'
-import Loading from '@/app/utils/Loading';
+import LoadingAnimation from '@/app/utils/LoadingAnimation';
 
 export const metadata = {
     title: "Features page",
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function FeaturesPage() {
     return (
-        <Suspense fallback={ <Loading /> }>
+        <Suspense fallback={ <LoadingAnimation /> }>
             <main className="features-page">
                 <div className="container">
                     <h1 className="features-heading">Features</h1>

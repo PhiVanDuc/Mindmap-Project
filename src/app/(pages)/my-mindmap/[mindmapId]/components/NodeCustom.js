@@ -59,6 +59,14 @@ export default function NodeCustom({ id, data, isConnectable }) {
         clickedOnNode.current = false;
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            inputContent.current.blur();
+            nodeCustom.current.style.backgroundColor = "rgb(139,195,74)";
+            overlay.current.zIndex = "1";
+        }
+    }
+
     useEffect(() => {
         document.addEventListener("click", handleDocumentClick);
 
@@ -87,6 +95,7 @@ export default function NodeCustom({ id, data, isConnectable }) {
                     type="text"
                     value={content}
                     onChange={handleChange}
+                    onKeyDown={ handleKeyDown }
                 />
             </div>
 

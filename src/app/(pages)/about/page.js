@@ -7,7 +7,7 @@ import person_3_image from '@/assets/images/person-3.png';
 import person_4_image from '@/assets/images/person-4.png';
 
 import { Suspense } from 'react'
-import Loading from '@/app/utils/Loading';
+import LoadingAnimation from '@/app/utils/LoadingAnimation';
 
 export const metadata = {
     title: "About Page",
@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <Suspense fallback={ <Loading /> }>
+    <Suspense fallback={ <LoadingAnimation /> }>
         <main className='about-page'>
             <div className="container">
                 <div className="about">

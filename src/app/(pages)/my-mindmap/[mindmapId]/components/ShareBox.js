@@ -42,8 +42,11 @@ export default function ShareBox({ session, mindmap }) {
         }
 
         let isAccessible;
-        if (toggle === "private") isAccessible = false
-        else isAccessible = true
+        if (toggle === "private") {
+            isAccessible = false;
+        } else {
+            isAccessible = true;
+        }
 
         notify("warn", "Chờ trong giây lát...")
         const response = await fetchSaveMindmap({

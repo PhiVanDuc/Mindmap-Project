@@ -5,7 +5,7 @@ import price_2 from '@/assets/images/abstract-2.jpg'
 import price_3 from '@/assets/images/abstract-3.jpg'
 
 import { Suspense } from 'react'
-import Loading from '@/app/utils/Loading';
+import LoadingAnimation from '@/app/utils/LoadingAnimation';
 
 export const metadata = {
     title: "Prices Page",
@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function PricesPage() {
     return (
-        <Suspense fallback={ <Loading /> }>
+        <Suspense fallback={ <LoadingAnimation /> }>
             <main className='prices-page'>
                 <div className="container">
                     <h1 className='prices-page-heading'>

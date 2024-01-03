@@ -6,7 +6,7 @@ import ButtonAddMindmap from './ButtonAddMindmap';
 import TableMindmapList from './TableMindmapList';
 
 import { Suspense } from 'react'
-import Loading from '@/app/utils/Loading';
+import LoadingAnimation from '@/app/utils/LoadingAnimation';
 
 import './style.scss'
 
@@ -20,7 +20,7 @@ export default async function MyMindmapPage() {
     const mindmapList = await fetchMindmapList();
 
     return (
-        <Suspense fallback={ <Loading /> }>
+        <Suspense fallback={ <LoadingAnimation /> }>
             <main className='my-mindmap-page'>
                 <div className="container">
                     <h1 className="my-mindmap-page-heading">Mindmap của tôi</h1>

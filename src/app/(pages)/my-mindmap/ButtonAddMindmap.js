@@ -4,7 +4,7 @@ import { fetchAddMindmap } from '@/app/api/actions/handleClientSide';
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import Loading from '@/app/utils/Loading';
+import LoadingAnimation from '@/app/utils/LoadingAnimation';
 import notify from '@/app/utils/notify';
 import shareImg from '@/assets/images/so-do-tu-duy.webp'
 
@@ -67,7 +67,7 @@ export default function ButtonAddMindmap({ session }) {
             <button className="button-new-mindmap" onClick={ handleClickAddMindmap }>Thêm mới</button>
         
             {
-                loading && <Loading />
+                loading && <LoadingAnimation />
             }
         </Fragment>
     )
