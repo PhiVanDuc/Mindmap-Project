@@ -10,7 +10,6 @@ import './styleShareBox.scss'
 
 export default function ShareBox({ session, mindmap }) {
     const fullUrl = useRef("");
-    const originUrl = useRef("");
     const router = useRouter();
     const [toggle, setToggle] = useState("private");
     const [nameShare, setNameShare] = useState(mindmap.metadata.name);
@@ -18,7 +17,6 @@ export default function ShareBox({ session, mindmap }) {
 
     useEffect(() => {
         fullUrl.current = window.location.href;
-        originUrl.current = window.location.origin;
     }, [])
     
     const handleClickPrivate = () => {
@@ -53,7 +51,7 @@ export default function ShareBox({ session, mindmap }) {
             metadata: {
                 name: nameShare,
                 desc: descShare,
-                image: `${originUrl.current}${mindmap.metadata.image}`
+                image: `${mindmap.metadata.image}`
             },
             isAccessible
         });
@@ -103,7 +101,7 @@ export default function ShareBox({ session, mindmap }) {
 
                             <div className="group">
                                 <label htmlFor="share-img">Ảnh chia sẻ</label>
-                                <input id='share-img' value={ `${originUrl.current}${mindmap.metadata.image}` } readOnly />
+                                <input id='share-img' value={ `${mindmap.metadata.image}` } readOnly />
                             </div>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ export default function ButtonAddMindmap({ session }) {
             metadata: {
                 name: "Mindmap không có tên",
                 desc: "",
-                image: `${shareImg.src}`
+                image: `${window.location.origin}${shareImg.src}`,
             },
             isAccessible: false,
             email: session?.user?.email,
