@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react";
+import { stripHtml } from "@/app/utils/methods";
+import { useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 
 const cssHandle = {
@@ -10,91 +11,71 @@ const cssHandle = {
     backgroundColor: "rgb(79,70,229)",
     outline: "1px solid white",
     bottom: "0px",
-    translate: "0px 50%"
+    translate: "0px 50%",
+    zIndex: 2,
 };
 
-export default function NodeCustomFirst({ id, data, isConnectable }) {
-    const {setNodes} = data;
-    const [content, setContent] = useState(data.label);
+export default function NodeCustomFirst({ id, data, isConnectable, selected }) {
+    const overlayRef = useRef(null);
+    const inputContentRef = useRef(null);
 
-    const nodeCustom = useRef(null);
-    const overlay = useRef(null);
-    const inputContent = useRef(null);
-    const clickedOnNode = useRef(false);
-    const doubleClick = useRef(false);
+    const { label, setNodes } = data;
+    const [content, setContent] = useState(label);
 
-    const handleChange = (event) => {
-        setContent(event.target.value);
+
+    const handleDoubleClick = () => {
+        inputContentRef.current.focus();
+    }
+
+    const handleChangeContent = (event) => {
+        setContent(stripHtml(event.target.value));
 
         setNodes((currentNodes) => {
             const copy = [...currentNodes];
             copy[copy.findIndex(obj => obj.id === id)].data.label = event.target.value;
             return copy;
         });
-    };
+    }
 
-    const handleMainContentClick = (event) => {
-        clickedOnNode.current = true;
-        
-        if (event.detail === 1) {
-            nodeCustom.current.style.backgroundColor = "rgb(191,195,74)";
-            doubleClick.current = false;
-        }
-        else if (event.detail === 2) {
-            overlay.current.zIndex = "-1";
-            inputContent.current.focus();
-            doubleClick.current = true;
-        }
-    };
+    const fillEmpty = (event) => {
+        const element = event.target;
+        const value = element.value.trim();
 
-    const handleDocumentClick = (event) => {
-        const target = event.target;
-        const tagName = target.tagName.toLowerCase();
-
-        if (!clickedOnNode.current) {
-            if ((event.target.className === "overlay" && event.ctrlKey)  || (event.ctrlKey && tagName === "path")) return;
-            nodeCustom.current.style.backgroundColor = "rgb(139,195,74)";
-            overlay.current.zIndex = "1";
-        }
-        clickedOnNode.current = false;
-    };
-
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-            if (!event.target.value.trim()) {
-                event.target.value = "My Mindmap"
-                setContent("My Mindmap");
-            }
-
-            inputContent.current.blur();
-            nodeCustom.current.style.backgroundColor = "rgb(139,195,74)";
-            overlay.current.zIndex = "1";
+        if (!value.trim()) {
+            element.value = "My Mindmap";
+            
+            setContent("My Mindmap");
+            setNodes((currentNodes) => {
+                const copy = [...currentNodes];
+                copy[copy.findIndex(obj => obj.id === id)].data.label = "My Mindmap";
+                return copy;
+            });
         }
     }
 
-    useEffect(() => {
-        document.addEventListener("click", handleDocumentClick);
+    const handleBlur = (event) => {
+        fillEmpty(event);
+    }
 
-        return () => {
-            document.removeEventListener("click", handleDocumentClick);
-        };
-    }, []);
+    const handleKeyDown = (event) => {
+        if (event.key !== "Enter") return;
+
+        fillEmpty(event);
+        inputContentRef.current.blur();
+    }
 
     return (
         <div 
             className="node-custom"
-            onClick={handleMainContentClick}
-            ref={nodeCustom}
+            onDoubleClick={ handleDoubleClick }
+            style={{ 
+                backgroundColor: selected ? "rgb(191,195,74)" : "rgb(139,195,74)",
+                zIndex: selected ? "-1" : "1",
+            }}
         >
             <div className="main-content" >
-                <div ref={ overlay } className="overlay" ></div>
-                <input
-                    ref={ inputContent }
-                    type="text"
-                    value={content}
-                    onChange={handleChange}
-                    onKeyDown={ handleKeyDown }
-                />
+                <div ref={ overlayRef } className="overlay"></div>
+                <input ref={ inputContentRef } type="text" value={ content } onChange={ handleChangeContent } onBlur={ handleBlur } onKeyDown={ handleKeyDown } />
             </div>
 
             <Handle

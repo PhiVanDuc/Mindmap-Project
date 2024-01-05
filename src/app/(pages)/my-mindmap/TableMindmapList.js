@@ -10,7 +10,6 @@ import notify from '@/app/utils/notify';
 
 export default function TableMindmapList({ session, mindmapList }) {
     const router = useRouter();
-    const checkEmpty = useRef(false);
 
     const handleClickDelete = (id) => {
         const method = async (id) => {
