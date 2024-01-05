@@ -122,6 +122,7 @@ function Flow({ mindmap, session }) {
                     multiSelectionKeyCode = "Control"
                     deleteKeyCode = "Delete"
                     nodeOrigin={[0.5, 0]}
+                    className="touchdevice-flow"
                 >
                     <Controls />
                     <MiniMap zoomable pannable nodeStrokeWidth={5} nodeBorderRadius={10} zoomStep={1} nodeColor="#FFCC00" position="top-left" />
