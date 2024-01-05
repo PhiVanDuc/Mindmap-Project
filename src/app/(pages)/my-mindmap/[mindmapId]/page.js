@@ -11,11 +11,9 @@ export const generateMetadata = async ({ params }) => {
     const mindmap = await fetchMindmap(mindmapId);
 
     return {
-        title: mindmap.metadata.name,
-        description: mindmap.metadata.desc,
+        title: mindmap.name,
+        description: mindmap.desc,
         openGraph: {
-            title: mindmap.metadata.name,
-            description: mindmap.metadata.desc,
             images: [mindmap.metadata.image],
         }
     }

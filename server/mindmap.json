@@ -1,86 +1,30 @@
 {
   "mindmap": [
     {
-      "id": "315c0c44-17cb-457b-ae10-4399ab57c547",
-      "name": "yeu em",
+      "id": "39b05072-d261-4ce8-b729-0894d2d88c0a",
+      "name": "Mindmap không có tên",
       "desc": "Chưa có mô tả",
       "nodes": [
         {
           "id": "root",
           "data": {
-            "label": "duc porn "
+            "label": "My Mindmap"
           },
           "position": {
-            "x": -29.333333333333336,
-            "y": -71.33333333333333
+            "x": 0,
+            "y": 0
           },
           "type": "nodeCustomFirst",
-          "width": 250,
-          "height": 60,
-          "selected": false,
-          "dragging": false,
-          "positionAbsolute": {
-            "x": -29.333333333333336,
-            "y": -71.33333333333333
-          }
-        },
-        {
-          "id": "JAs4CW-oJ7lp2E-Mj7V30",
-          "position": {
-            "x": -167.33333333333334,
-            "y": 62.82916666666665
-          },
-          "data": {
-            "label": "javhd"
-          },
-          "type": "nodeCustom",
-          "width": 250,
-          "height": 60,
-          "selected": false,
-          "dragging": false
-        },
-        {
-          "id": "XXWVf9I4efjqUWaaeAGZc",
-          "position": {
-            "x": 128.33333333333331,
-            "y": 60.49583333333332
-          },
-          "data": {
-            "label": "vlxx.edu"
-          },
-          "type": "nodeCustom",
-          "width": 250,
-          "height": 60,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 128.33333333333331,
-            "y": 60.49583333333332
-          },
-          "dragging": false
+          "deletable": false
         }
       ],
-      "edges": [
-        {
-          "id": "iHtqx6kIAH8Ead9vjPBN6",
-          "source": "root",
-          "target": "JAs4CW-oJ7lp2E-Mj7V30",
-          "type": "edgeCustom"
-        },
-        {
-          "id": "45kicEySp_RhwPIKF8NNP",
-          "source": "root",
-          "target": "XXWVf9I4efjqUWaaeAGZc",
-          "type": "edgeCustom"
-        }
-      ],
+      "edges": [],
       "metadata": {
-        "name": "Mindmap không có tên",
-        "desc": "",
         "image": "http://localhost:3000/_next/static/media/so-do-tu-duy.913b15fe.webp"
       },
-      "isAccessible": true,
+      "isAccessible": false,
       "email": "phivanduc325@gmail.com",
-      "created_at": "2024/01/02 14:47:29"
+      "created_at": "2024/01/05 14:33:06"
     }
   ]
 }

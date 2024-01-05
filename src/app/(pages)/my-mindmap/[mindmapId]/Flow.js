@@ -76,6 +76,7 @@ function Flow({ mindmap, session }) {
                     x: event.clientX,
                     y: event.clientY,
                 }),
+                deletable: true,
                 data: {
                     label: `New Node`,
                     setNodes
@@ -100,28 +101,6 @@ function Flow({ mindmap, session }) {
         }
     }, [screenToFlowPosition])
 
-    const { getNode } = useReactFlow();
-    function shouldNodeBeRemoved(node) {
-        if (node.type === 'nodeCustomFirst') return false;
-        return true;
-    }
-
-    const validateOnNodesChange = (changes) => {
-        const nextChanges = changes.reduce((acc, change) => {
-            if (change.type === 'remove') {
-              const node = getNode(change.id)
-      
-              if (shouldNodeBeRemoved(node)) {
-                return [...acc, change];
-              }
-              return acc;
-            }
-            return [...acc, change];
-        }, [])
-    
-        onNodesChange(nextChanges);
-    }
-
     return (
         <Fragment>
             <MindmapInfo mindmap={mindmap} nodes={ nodes } edges={ edges } session={ session } />
@@ -131,7 +110,7 @@ function Flow({ mindmap, session }) {
                     nodes = { nodes }
                     edges = { edges }
                     onConnect = { onConnect }
-                    onNodesChange = { validateOnNodesChange }
+                    onNodesChange = { onNodesChange }
                     onEdgesChange = { onEdgesChange }
                     connectionLineStyle={connectionLineStyle}
                     onConnectStart={onConnectStart}

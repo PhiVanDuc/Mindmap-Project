@@ -2,37 +2,26 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation';
-
 import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 import notify from '@/app/utils/notify';
 
-import './styleShareBox.scss'
+import './styleShareBox.scss';
 
-export default function ShareBox({ session, mindmap }) {
+export default function ShareBox({ session, mindmap, name, desc, handleChangeName, handleChangeDesc, handleBlur }) {
     const fullUrl = useRef("");
     const router = useRouter();
     const [toggle, setToggle] = useState("private");
-    const [nameShare, setNameShare] = useState(mindmap.metadata.name);
-    const [descShare, setDescShare] = useState(mindmap.metadata.desc);
 
     useEffect(() => {
         fullUrl.current = window.location.href;
     }, [])
-    
+
     const handleClickPrivate = () => {
         setToggle("private");
     }
 
     const handleClickPublic = () => {
         setToggle("public")
-    }
-
-    const handleChangeNameShare = (event) => {
-        setNameShare(event.target.value)
-    }
-
-    const handleChangeDescShare = (event) => {
-        setDescShare(event.target.value)
     }
 
     const handleClickSaveShare = async () => {
@@ -51,11 +40,8 @@ export default function ShareBox({ session, mindmap }) {
         notify("warn", "Chờ trong giây lát...")
         const response = await fetchSaveMindmap({
             ...mindmap,
-            metadata: {
-                name: nameShare,
-                desc: descShare,
-                image: `${mindmap.metadata.image}`
-            },
+            name,
+            desc,
             isAccessible
         });
 
@@ -94,12 +80,12 @@ export default function ShareBox({ session, mindmap }) {
 
                             <div className="group">
                                 <label htmlFor="share-title">Tiêu đề</label>
-                                <input type="text" id='share-title' value={ nameShare } onChange={ handleChangeNameShare } />
+                                <input type="text" id='share-title' value={ name } onChange={ (event) => { handleChangeName(event) } } onBlur={ (event) => { handleBlur(event) } } />
                             </div>
 
                             <div className="group">
                                 <label htmlFor="share-desc">Mô tả</label>
-                                <textarea id='share-desc' value={ descShare } onChange={ handleChangeDescShare } />
+                                <textarea id='share-desc' value={ desc } onChange={ (event) => { handleChangeDesc(event) } } onBlur={ (event) => { handleBlur(event) } } />
                             </div>
 
                             <div className="group">

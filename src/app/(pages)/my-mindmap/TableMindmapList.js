@@ -29,10 +29,6 @@ export default function TableMindmapList({ session, mindmapList }) {
         router.push(`/my-mindmap/${id}`);
     }
 
-    checkEmpty.current = mindmapList.some((mindmap) => {
-        return mindmap.email === session.user.email;
-    })
-
     return (
         <Fragment>
             <div className="table-recorded">
@@ -59,7 +55,13 @@ export default function TableMindmapList({ session, mindmapList }) {
                 <main className='table-body'>
                     {
                         mindmapList === "error" ?
-                        ( <h3>Lỗi tải dữ liệu!</h3> ) : 
+                        (
+                            <h3>Lỗi tải dữ liệu!</h3>
+                        ) :
+                        Array.isArray(mindmapList) && !mindmapList.some((mindmap) => { return mindmap.email === session.user.email }) ?
+                        (
+                            <h3>Mindmap trống!</h3>
+                        ) :
                         Array.isArray(mindmapList) && mindmapList.length > 0 &&
                         (
                             mindmapList.map(({ id, name, desc, email, created_at }) => {
@@ -98,10 +100,6 @@ export default function TableMindmapList({ session, mindmapList }) {
                                 }
                             })
                         )
-                    }
-
-                    {
-                        !checkEmpty.current && <h3>Mindmap trống!</h3>
                     }
                 </main>
             </div>

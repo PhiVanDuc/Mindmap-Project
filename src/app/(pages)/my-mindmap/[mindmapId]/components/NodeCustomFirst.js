@@ -61,6 +61,11 @@ export default function NodeCustomFirst({ id, data, isConnectable }) {
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
+            if (!event.target.value.trim()) {
+                event.target.value = "My Mindmap"
+                setContent("My Mindmap");
+            }
+
             inputContent.current.blur();
             nodeCustom.current.style.backgroundColor = "rgb(139,195,74)";
             overlay.current.zIndex = "1";

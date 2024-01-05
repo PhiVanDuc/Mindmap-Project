@@ -1,13 +1,14 @@
 "use client"
 
 import React, { useState, Fragment } from 'react';
+import { useRouter } from 'next/navigation';
 import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 
 import ShareBox from './ShareBox';
 import notify from '@/app/utils/notify';
-import { useRouter } from 'next/navigation';
+import { stripHtml } from '@/app/utils/methods';
 
-import './style.scss'
+import './style.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MindmapInfo({ session, mindmap, nodes, edges }) {
@@ -16,11 +17,13 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
     const [desc, setDesc] = useState(mindmap.desc);
 
     const handleChangeName = (event) => {
-        setName(event.target.value);
+        if (!event.target.value.trim()) document.title = "Trống";
+        else document.title = event.target.value.trim();
+        setName(stripHtml(event.target.value));
     }
 
     const handleChangeDesc = (event) => {
-        setDesc(event.target.value);
+        setDesc(stripHtml(event.target.value));
     }
 
     const handleClickSave = async () => {
@@ -43,7 +46,7 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
             name,
             desc,
             nodes: saveNodes,
-            edges
+            edges,
         }
 
         notify("warn", "Chờ trong giây lát...")
@@ -56,13 +59,27 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
         else notify("error", "Lưu thất bại!")
     }
 
+    const handleBlur = (event) => {
+        if (!event.target.value.trim() ) {
+            if (event.target.nodeName === "INPUT") {
+                document.title = "Mindmap không có tên";
+                event.target.value = "Mindmap không có tên";
+                setName("Mindmap không có tên");
+            }
+            else {
+                event.target.value = "Chưa có mô tả";
+                setDesc("Chưa có mô tả");
+            }
+        }
+    }
+
     return (
         <Fragment>
             <header className="mindmap-info">
                 <div className="container">
                     <div className="mindmap-inputs">
-                        <input type="text" className="input-mindmap-name" value={ name } onChange={ handleChangeName } />
-                        <textarea className="textarea-mindmap-desc" value={ desc } onChange={ handleChangeDesc }></textarea>
+                        <input type="text" style={{ backgroundColor: "transparent" }} className="input-mindmap-name" value={ name } onChange={ handleChangeName } onBlur={ handleBlur }/>
+                        <textarea className="textarea-mindmap-desc" value={ desc } onChange={ handleChangeDesc } onBlur={ handleBlur }></textarea>
                     </div>
 
                     <div className="mindmap-buttons">
@@ -83,7 +100,7 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
                 </div>
             </header>
 
-            <ShareBox mindmap={ mindmap } session={ session } />
+            <ShareBox mindmap={ mindmap } session={ session } name={ name } desc={ desc } handleChangeName={ handleChangeName } handleChangeDesc={ handleChangeDesc } handleBlur= { handleBlur } />
         </Fragment>
     )
 }

@@ -36,13 +36,12 @@ export default function ButtonAddMindmap({ session }) {
                         x: 0,
                         y: 0
                     },
-                    type: "nodeCustomFirst"
+                    type: "nodeCustomFirst",
+                    deletable: false
                 }
             ],
             edges: [],
             metadata: {
-                name: "Mindmap không có tên",
-                desc: "",
                 image: `${window.location.origin}${shareImg.src}`,
             },
             isAccessible: false,
