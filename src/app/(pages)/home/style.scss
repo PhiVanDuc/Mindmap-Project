@@ -2,71 +2,96 @@
 
 .home-page {
     background-color: $base_light_color;
-    
+
     .container {
-        width: 1200px;
-        max-width: 100%;
-        padding: 0px 10px;
-        margin: 0 auto;
-
-        .home-page-heading {
-            padding-top: 80px;
+        .heading-hero {
+            font-size: 2.4rem;
+            font-weight: 700;
             text-align: center;
-            font-size: 3rem;
-            margin-bottom: 40px;
+            padding: 50px 20px 0px 20px;
+            margin-bottom: 40px; 
         }
-
-        .button-free {
+    
+        .button-hero {
             text-align: center;
             margin-bottom: 40px;
-
+    
             a {
-                font-size: 1.4rem;
-                font-weight: 600;
-                padding: 10px 40px;
+                padding: 15px 30px;
                 border-radius: 99px;
-                background-color: $base_color;
+                font-weight: 500;
                 color: white;
+                background-color: $base_color;
             }
         }
 
-        .image-hero {
+        .img-hero {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
 
             img {
-                width: 700px;
-                border-radius: 5px;
+                max-width: 670px;
             }
         }
 
-        .useages {
-            display: flex;
-            align-items: center;
-            padding-bottom: 60px;    
+        .advantages {
+            .advantage {
+                margin-bottom: 60px;
 
-            .useage {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                width: calc(100% / 3);
-
-                h3 {
+                .advantage-heading {
+                    position: relative;
                     font-size: 1.8rem;
                     font-weight: 600;
-                    margin-bottom: 15px;
-                    padding-top: 10px;
-                    border-top: 2px solid rgb(199,210,254);
+                    color: rgb(45, 45, 45);
+                    text-transform: uppercase;
+                    margin-bottom: 20px;
+                    text-align: center;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: -20px;
+                        left: 50%;
+                        width: 100px;
+                        height: 2px;
+                        background-color: rgb(211, 211, 211);
+                        translate: -50% 0%;
+                        z-index: 0;
+                    }
                 }
 
-                p {
+                .advantage-desc {
+                    display: flex;
+                    justify-content: center;
                     text-align: center;
-                    font-size: 1.3rem;
-                    color: rgb(82, 82, 82);
-                    width: 300px;
-                    line-height: 1.5;
+
+                    p {
+                        max-width: 450px;
+                        color: rgb(126, 126, 126);
+                        font-size: 1.5rem;
+                        line-height: 1.5;
+                    }
                 }
+            }
+        }
+    }
+}
+
+
+// Responsive
+
+
+@media screen and (min-width: 992px) {
+    .home-page {
+        .container {
+            .heading-hero {
+                font-size: 2.8rem;
+                padding-top: 100px;
+                margin-bottom: 40px;
+            }
+
+            .img-hero {
+                margin-bottom: 80px;
             }
         }
     }
