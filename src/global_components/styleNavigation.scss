@@ -63,6 +63,7 @@
                             height: 100%;
                             background-color: white;
                             padding: 30px;
+                            overflow-y: auto;
 
                             .nav-list {
                                 display: flex;
@@ -180,6 +181,8 @@
 @media screen and (min-width: 992px) {
     .header-main {
         .container {
+            max-width: 1140px;
+
             .overlay {
                 display: none;
             }
@@ -211,6 +214,7 @@
                                 padding: 0;
                                 width: 100%;
                                 background-color: transparent;
+                                overflow: visible;
 
                                 .nav-list {
                                     flex-direction: row;
@@ -257,6 +261,14 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .header-main {
+        .container {
+            max-width: 1400px;
         }
     }
 }

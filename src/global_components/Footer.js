@@ -8,10 +8,10 @@ export default function Footer() {
                 <div className="footer-top">
                     {/* Begin first row */}
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12 col-xl-8">
                             {/* Begin second row */}
                             <div className="row">
-                                <div className="col-12">
+                                <div className="col-12 col-lg-3">
                                     <ul className='footer-list'>
                                         <li className="footer-item">
                                             <h3>Features</h3>
@@ -43,7 +43,7 @@ export default function Footer() {
                                     </ul>
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-12 col-lg-3">
                                     <ul className='footer-list'>
                                         <li className="footer-item">
                                             <h3>Resources</h3>
@@ -67,7 +67,7 @@ export default function Footer() {
                                     </ul>
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-12 col-lg-3">
                                     <ul className='footer-list'>
                                         <li className="footer-item">
                                             <h3>About</h3>
@@ -91,7 +91,7 @@ export default function Footer() {
                                     </ul>
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-12 col-lg-3">
                                     <ul className='footer-list'>
                                         <li className="footer-item">
                                             <h3>Help</h3>
@@ -114,7 +114,7 @@ export default function Footer() {
                             {/* End second row */}
                         </div>
 
-                        <div className="col-12">
+                        <div className="col-12 col-xl-4">
                             <div className="footer-social-network">
                                 <h3>Stay connected</h3>
 
@@ -132,16 +132,16 @@ export default function Footer() {
                 <div className="footer-bottom">
                     {/* Begin first row */}
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12 col-lg-8">
                             {/* Begin second row */}
                             <div className="row">
-                                <div className="col-12">
+                                <div className="col-12 col-lg-4">
                                     <div className="footer-info">
                                         <h3>FWR</h3>
                                     </div>
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-12 col-lg-4">
                                     <div className="footer-info">
                                         <h3>Address</h3>
                                         <p>123 6th St.</p>
@@ -149,7 +149,7 @@ export default function Footer() {
                                     </div>
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-12 col-lg-4">
                                     <div className="footer-info">
                                         <h3>Free Resources</h3>
                                         <p>Use our HTML blocks for <span>FREE</span>.</p>
@@ -160,7 +160,7 @@ export default function Footer() {
                             {/* End second row */}
                         </div>
 
-                        <div className="col-12">
+                        <div className="col-12 col-lg-4">
                             <div className='button-start'>
                                 <Link href="" >Get Started</Link>
                             </div>

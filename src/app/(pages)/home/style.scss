@@ -84,6 +84,8 @@
 @media screen and (min-width: 992px) {
     .home-page {
         .container {
+            max-width: 1140px;
+
             .heading-hero {
                 font-size: 2.8rem;
                 padding-top: 100px;
@@ -93,6 +95,14 @@
             .img-hero {
                 margin-bottom: 80px;
             }
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .home-page {
+        .container {
+            max-width: 1400px;
         }
     }
 }
