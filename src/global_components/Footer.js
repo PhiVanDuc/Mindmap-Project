@@ -119,9 +119,15 @@ export default function Footer() {
                                 <h3>Stay connected</h3>
 
                                 <ul className='footer-social-list'>
-                                    <li className="footer-social-item">Facebook</li>
-                                    <li className="footer-social-item">Twitter</li>
-                                    <li className="footer-social-item">Google</li>
+                                    <li className="footer-social-item">
+                                        <a href="">Facebook</a>
+                                    </li>
+                                    <li className="footer-social-item">
+                                        <a href="">Twitter</a>
+                                    </li>
+                                    <li className="footer-social-item">
+                                        <a href="">Google</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
