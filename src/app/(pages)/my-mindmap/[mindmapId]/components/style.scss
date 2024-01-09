@@ -88,6 +88,14 @@
 @media screen and (min-width: 768px) {
     .mindmap-info {
         .container {
+            .row-root {
+                align-items: center;
+            }
+
+            .mindmap-inputs {
+                margin-bottom: 0px;
+            }
+
             .mindmap-buttons {
                 div[class^="col-"] {
                     button,

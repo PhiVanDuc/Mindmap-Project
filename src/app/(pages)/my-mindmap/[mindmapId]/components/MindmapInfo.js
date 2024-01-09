@@ -77,7 +77,7 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
         <Fragment>
             <header className="mindmap-info">
                 <div className="container">
-                    <div className="row">
+                    <div className="row row-root">
                         <div className="col-12 col-md-6">
                             <div className="mindmap-inputs">
                                 <input type="text" style={{ backgroundColor: "transparent" }} className="input-mindmap-name" value={ name } onChange={ handleChangeName } onBlur={ handleBlur }/>
