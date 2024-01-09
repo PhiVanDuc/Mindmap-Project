@@ -1,7 +1,7 @@
 "use client"
 
-import { Fragment, useCallback, useEffect, useRef } from "react"
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, useReactFlow, ReactFlowProvider } from "reactflow"
+import { Fragment, useCallback, useEffect, useRef, useState } from "react"
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, useReactFlow, ReactFlowProvider, Panel } from "reactflow"
 
 import MindmapInfo from "./components/MindmapInfo"
 import NodeCustomFirst from "./components/NodeCustomFirst"
@@ -29,6 +29,7 @@ const connectionLineStyle = {
 
 function Flow({ mindmap, session }) {
     const loading = useRef(false);
+    const [minimap, setMinimap] = useState(true);
     const [nodes, setNodes, onNodesChange] = useNodesState([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
@@ -46,6 +47,17 @@ function Flow({ mindmap, session }) {
         });
 
         setEdges(mindmap.edges);
+
+        if (window.innerWidth < 992) setMinimap(false);
+        const handleResize = () => {
+            if (window.innerWidth >= 992) setMinimap(true);
+            else setMinimap(false)
+        }
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
     }, [])
 
     const connectingNodeId = useRef(null);
@@ -125,7 +137,9 @@ function Flow({ mindmap, session }) {
                     className="touchdevice-flow"
                 >
                     <Controls />
-                    <MiniMap zoomable pannable nodeStrokeWidth={5} nodeBorderRadius={10} zoomStep={1} nodeColor="#FFCC00" position="top-left" />
+                    {
+                        minimap && <MiniMap zoomable pannable strokeWidth={100} nodeStrokeWidth={5} nodeBorderRadius={10} zoomStep={1} nodeColor="#FFCC00" position="top-left" />
+                    }
                     <Background variant = "dots" color = "#EBE3D5" gap = "30" size = "4" />
                 </ReactFlow >
             </div>
