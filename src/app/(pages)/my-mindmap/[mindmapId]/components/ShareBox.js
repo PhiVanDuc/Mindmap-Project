@@ -74,14 +74,12 @@ export default function ShareBox({ session, mindmap }) {
     }
 
     const handleBlur = (event, isImage = false) => {
-        if (isImage) {
-            event.target.value = mindmap.metadata.image;
-            setShareImg(mindmap.metadata.image);
-            return;
-        }
-
-        if (!event.target.value.trim() ) {
-            if (event.target.nodeName === "INPUT") {
+        if (!event.target.value.trim()) {
+            if (isImage) {
+                event.target.value = mindmap.metadata.image;
+                setShareImg(mindmap.metadata.image);
+            }
+            else if (event.target.nodeName === "INPUT") {
                 document.title = mindmap.metadata.title;
                 event.target.value = mindmap.metadata.title;
                 setShareTitle(mindmap.metadata.title);
