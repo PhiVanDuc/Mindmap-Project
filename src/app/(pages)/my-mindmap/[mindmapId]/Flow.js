@@ -11,7 +11,7 @@ import { nanoid } from "nanoid"
 
 import 'reactflow/dist/style.css'
 import './styleNodeCustom.scss'
-import Loading from "@/app/utils/LoadingAnimation"
+import Loading from "@/app/utils/loading"
 
 const nodeTypes = {
     nodeCustomFirst: NodeCustomFirst,

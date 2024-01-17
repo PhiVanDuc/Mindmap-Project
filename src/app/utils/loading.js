@@ -1,4 +1,4 @@
-import './styleLoading.scss'
+import '@/assets/scss/styleLoading.scss';
 
 export default function LoadingAnimation() {
     return (

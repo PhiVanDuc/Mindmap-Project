@@ -4,9 +4,8 @@ import { fetchAddMindmap } from '@/app/api/actions/handleClientSide';
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import LoadingAnimation from '@/app/utils/LoadingAnimation';
+import LoadingAnimation from '@/app/utils/loading.js';
 import notify from '@/app/utils/notify';
-import shareImg from '@/assets/images/so-do-tu-duy.webp'
 
 export default function ButtonAddMindmap({ session }) {
     const [loading, setLoading] = useState(false);
@@ -42,7 +41,9 @@ export default function ButtonAddMindmap({ session }) {
             ],
             edges: [],
             metadata: {
-                image: `${window.location.origin}${shareImg.src}`,
+                image: `https://mindmap-project-seven.vercel.app/_next/static/media/so-do-tu-duy.913b15fe.webp`,
+                title: 'Mindmap không có tên',
+                description: 'Chưa có mô tả'
             },
             isAccessible: false,
             email: session?.user?.email,

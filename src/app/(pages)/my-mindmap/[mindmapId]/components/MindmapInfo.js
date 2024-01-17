@@ -17,8 +17,11 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
     const [desc, setDesc] = useState(mindmap.desc);
 
     const handleChangeName = (event) => {
-        if (!event.target.value.trim()) document.title = "Trống";
-        else document.title = event.target.value.trim();
+        if (!mindmap.isAccessible) {
+            if (!event.target.value.trim()) document.title = "Trống";
+            else document.title = event.target.value.trim();
+        }
+        
         setName(stripHtml(event.target.value));
     }
 
@@ -121,7 +124,7 @@ export default function MindmapInfo({ session, mindmap, nodes, edges }) {
                 </div>
             </header>
 
-            <ShareBox mindmap={ mindmap } session={ session } name={ name } desc={ desc } handleChangeName={ handleChangeName } handleChangeDesc={ handleChangeDesc } handleBlur= { handleBlur } />
+            <ShareBox mindmap={ mindmap } session={ session } />
         </Fragment>
     )
 }

@@ -5,9 +5,6 @@ import options from '@/app/api/auth/[...nextauth]/options'
 import ButtonAddMindmap from './ButtonAddMindmap';
 import TableMindmapList from './TableMindmapList';
 
-import { Suspense } from 'react'
-import LoadingAnimation from '@/app/utils/LoadingAnimation';
-
 import './style.scss'
 
 export const metadata = {
@@ -20,15 +17,13 @@ export default async function MyMindmapPage() {
     const mindmapList = await fetchMindmapList();
 
     return (
-        <Suspense fallback={ <LoadingAnimation /> }>
-            <main className='my-mindmap-page'>
-                <div className="container">
-                    <h1 className="my-mindmap-page-heading">Mindmap của tôi</h1>
-                    
-                    <ButtonAddMindmap session={ session } />
-                    <TableMindmapList session={ session } mindmapList={ mindmapList } />
-                </div>
-            </main>
-        </Suspense>
+        <main className='my-mindmap-page'>
+            <div className="container">
+                <h1 className="my-mindmap-page-heading">Mindmap của tôi</h1>
+                
+                <ButtonAddMindmap session={ session } />
+                <TableMindmapList session={ session } mindmapList={ mindmapList } />
+            </div>
+        </main>
     )
 }

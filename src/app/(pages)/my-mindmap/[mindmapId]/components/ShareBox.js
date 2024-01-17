@@ -1,16 +1,20 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchSaveMindmap } from '@/app/api/actions/handleFetchData';
 import notify from '@/app/utils/notify';
+import { stripHtml } from '@/app/utils/methods';
 
 import './styleShareBox.scss';
 
-export default function ShareBox({ session, mindmap, name, desc, handleChangeName, handleChangeDesc, handleBlur }) {
+export default function ShareBox({ session, mindmap }) {
     const fullUrl = useRef("");
     const router = useRouter();
-    const [toggle, setToggle] = useState("private");
+    const [toggle, setToggle] = useState(!mindmap.isAccessible ? 'private' : 'public');
+    const [shareImg, setShareImg] = useState(mindmap.metadata.image);
+    const [shareTitle, setShareTitle] = useState(mindmap.metadata.title);
+    const [shareDesc, setShareDesc] = useState(mindmap.metadata.description);
 
     useEffect(() => {
         fullUrl.current = window.location.href;
@@ -40,8 +44,11 @@ export default function ShareBox({ session, mindmap, name, desc, handleChangeNam
         notify("warn", "Chờ trong giây lát...")
         const response = await fetchSaveMindmap({
             ...mindmap,
-            name,
-            desc,
+            metadata: {
+                image: shareImg,
+                title: shareTitle,
+                description: shareDesc,
+            },
             isAccessible
         });
 
@@ -52,11 +59,46 @@ export default function ShareBox({ session, mindmap, name, desc, handleChangeNam
         else notify("error", "Lưu thất bại!")
     }
 
+    const handleChangeShareTitle = (event) => {
+        if (!event.target.value.trim()) document.title = "Trống";
+        else document.title = event.target.value.trim();
+        setShareTitle(stripHtml(event.target.value));
+    }
+
+    const handleChangeShareDesc = (event) => {
+        setShareDesc(stripHtml(event.target.value));
+    }
+    
+    const handleChangeShareImg = (event) => {
+        setShareImg(stripHtml(event.target.value));
+    }
+
+    const handleBlur = (event, isImage = false) => {
+        if (isImage) {
+            event.target.value = mindmap.metadata.image;
+            setShareImg(mindmap.metadata.image);
+            return;
+        }
+
+        if (!event.target.value.trim() ) {
+            if (event.target.nodeName === "INPUT") {
+                document.title = mindmap.metadata.title;
+                event.target.value = mindmap.metadata.title;
+                setShareTitle(mindmap.metadata.title);
+            }
+            else {
+                event.target.value = mindmap.metadata.description;
+                setShareDesc(mindmap.metadata.description);
+            }
+        }
+    }
+
     return (
         <> 
             <input type="checkbox" id='toggle-share-box' hidden />
             <input type="radio" id='toggle-share-private' name="toggle-share-body" checked={ toggle === "private" } hidden readOnly />
             <input type="radio" id='toggle-share-public' name="toggle-share-body" checked={ toggle === "public" } hidden readOnly />
+            
 
             <div className="share-box">
                 <label htmlFor="toggle-share-box" className='overlay'></label>
@@ -80,17 +122,17 @@ export default function ShareBox({ session, mindmap, name, desc, handleChangeNam
 
                             <div className="group">
                                 <label htmlFor="share-title">Tiêu đề</label>
-                                <input type="text" id='share-title' value={ name } onChange={ (event) => { handleChangeName(event) } } onBlur={ (event) => { handleBlur(event) } } />
+                                <input type="text" id='share-title' value={ shareTitle } onChange={ handleChangeShareTitle } onBlur={ (event) => { handleBlur(event) } } />
                             </div>
 
                             <div className="group">
                                 <label htmlFor="share-desc">Mô tả</label>
-                                <textarea id='share-desc' value={ desc } onChange={ (event) => { handleChangeDesc(event) } } onBlur={ (event) => { handleBlur(event) } } />
+                                <textarea id='share-desc' value={ shareDesc } onChange={ handleChangeShareDesc } onBlur={ (event) => { handleBlur(event) } } />
                             </div>
 
                             <div className="group">
                                 <label htmlFor="share-img">Ảnh chia sẻ</label>
-                                <input id='share-img' value={ `${mindmap.metadata.image}` } readOnly />
+                                <input id='share-img' value={ shareImg } onChange={ handleChangeShareImg } onBlur={ (event) => { handleBlur(event, true) } } />
                             </div>
                         </div>
                     </div>
